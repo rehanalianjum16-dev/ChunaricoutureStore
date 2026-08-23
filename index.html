@@ -1,0 +1,1568 @@
+<style>
+  :root{
+    --navy:#0B2A6B; --blue:#2F6FED; --blue-light:#EAF0FE; --ink:#12203D; --muted:#5B6B85;
+    --line:#E1E7F2; --surface:#F5F7FB; --white:#FFFFFF; --success:#1F9D67; --warn:#E8A33D; --danger:#D64545;
+    --gold:#C99A3B;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  .lumen{font-family:'Inter',system-ui,sans-serif; color:var(--ink); background:var(--white); min-height:100vh; line-height:1.45;}
+  .lumen h1,.lumen h2,.lumen h3,.lumen .disp{font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-0.01em;}
+  .lumen .mono{font-family:'IBM Plex Mono',monospace;}
+  .lumen a{color:inherit; text-decoration:none;}
+  .lumen button{font-family:inherit; cursor:pointer;}
+  .lumen ::selection{background:var(--blue-light);}
+
+  /* ---- Header ---- */
+  .lm-header{position:sticky; top:0; z-index:40; background:var(--white); border-bottom:1px solid var(--line);}
+  .lm-headtop{display:flex; align-items:center; gap:16px; padding:14px 20px; max-width:1200px; margin:0 auto;}
+  .lm-logo{font-size:22px; font-weight:700; color:var(--navy); display:flex; align-items:center; gap:6px; cursor:pointer; white-space:nowrap;}
+  .lm-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);display:inline-block;}
+  .lm-search{flex:1; display:flex; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:8px 14px; gap:8px; max-width:520px;}
+  .lm-search input{border:none; background:none; outline:none; flex:1; font-size:14px; color:var(--ink);}
+  .lm-navicons{display:flex; align-items:center; gap:18px;}
+  .lm-icon-btn{position:relative; background:none; border:none; font-size:19px; color:var(--navy); padding:4px;}
+  .lm-badge{position:absolute; top:-4px; right:-6px; background:var(--blue); color:#fff; font-size:10px; border-radius:999px; padding:1px 5px; font-weight:700;}
+  .lm-navrow{display:flex; gap:22px; padding:9px 20px; max-width:1200px; margin:0 auto; font-size:13.5px; overflow-x:auto;}
+  .lm-navrow a{color:var(--muted); white-space:nowrap; padding-bottom:2px; border-bottom:2px solid transparent;}
+  .lm-navrow a:hover, .lm-navrow a.active{color:var(--navy); border-color:var(--blue);}
+
+  .lm-wrap{max-width:1200px; margin:0 auto; padding:24px 20px 80px;}
+
+  /* ---- Hero ---- */
+  .lm-hero{background:linear-gradient(135deg,var(--navy),#153a8f); border-radius:16px; color:#fff; padding:52px 44px; display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:36px; overflow:hidden; position:relative;}
+  .lm-hero::after{content:"";position:absolute; right:-60px; top:-60px; width:260px; height:260px; border:1px solid rgba(255,255,255,.15); border-radius:50%;}
+  .lm-hero .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#9FB6F5; margin-bottom:10px;}
+  .lm-hero h1{font-size:38px; max-width:480px; margin:0 0 12px;}
+  .lm-hero p{color:#C7D5F7; max-width:420px; margin:0 0 20px; font-size:14.5px;}
+  .lm-btn{display:inline-flex; align-items:center; gap:8px; background:var(--blue); color:#fff; border:none; padding:11px 22px; border-radius:999px; font-weight:600; font-size:14px;}
+  .lm-btn:hover{background:#255ed1;}
+  .lm-btn.ghost{background:transparent; border:1px solid rgba(255,255,255,.5); color:#fff;}
+  .lm-btn.outline{background:#fff; color:var(--navy); border:1px solid var(--line);}
+  .lm-btn.small{padding:7px 14px; font-size:13px;}
+  .lm-btn.danger{background:var(--danger);}
+  .lm-btn.subtle{background:var(--blue-light); color:var(--navy);}
+  .lm-btn:disabled{opacity:.5; cursor:not-allowed;}
+
+  .lm-catstrip{display:flex; gap:12px; overflow-x:auto; margin-bottom:38px; padding-bottom:4px;}
+  .lm-cat-chip{flex:0 0 auto; width:104px; text-align:center; cursor:pointer;}
+  .lm-cat-chip .img{width:72px;height:72px;border-radius:50%;background:var(--blue-light); margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:26px; border:1px solid var(--line); overflow:hidden;}
+  .lm-cat-chip .img img{width:100%;height:100%;object-fit:cover;}
+  .lm-cat-chip span{font-size:12.5px; color:var(--ink); font-weight:600;}
+
+  .lm-sechead{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px;}
+  .lm-sechead h2{font-size:22px; margin:0;}
+  .lm-sechead a{font-size:13px; color:var(--blue); font-weight:600;}
+
+  .lm-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:18px; margin-bottom:44px;}
+
+  .lm-card{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:#fff; transition:box-shadow .15s, transform .15s; display:flex; flex-direction:column; position:relative;}
+  .lm-card:hover{box-shadow:0 10px 24px rgba(11,42,107,.09); transform:translateY(-2px);}
+  .lm-card .thumb{position:relative; aspect-ratio:1/1; background:var(--surface); cursor:pointer; overflow:hidden;}
+  .lm-card .thumb img{width:100%;height:100%;object-fit:cover;}
+  .lm-card .fav{position:absolute; top:8px; right:8px; background:#fff; border:1px solid var(--line); border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; font-size:14px;}
+  .lm-card .fav.active{color:var(--danger); border-color:var(--danger);}
+  .lm-card .disc-tag{position:absolute; top:8px; left:8px; background:var(--danger); color:#fff; font-size:11px; font-weight:700; padding:3px 7px; border-radius:6px;}
+  .lm-card .body{padding:12px 13px 14px; display:flex; flex-direction:column; gap:5px; flex:1;}
+  .lm-card .cat{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em;}
+  .lm-card .name{font-size:14px; font-weight:600; cursor:pointer; line-height:1.3; min-height:2.5em;}
+  .lm-card .stars{font-size:12px; color:var(--gold);}
+  .lm-card .stars .cnt{color:var(--muted); margin-left:4px;}
+  .lm-card .price-row{display:flex; align-items:baseline; gap:7px; margin-top:2px;}
+  .lm-card .price{font-weight:700; font-size:15.5px;}
+  .lm-card .old{color:var(--muted); text-decoration:line-through; font-size:12.5px;}
+  .lm-card .stock-out{font-size:11px; color:var(--danger); font-weight:600;}
+  .lm-card .cardbtns{display:flex; gap:6px; margin-top:8px;}
+  .lm-card .cardbtns button{flex:1; padding:7px 4px; font-size:12px; border-radius:7px; border:1px solid var(--line); background:#fff; font-weight:600;}
+  .lm-card .cardbtns .add{background:var(--navy); color:#fff; border-color:var(--navy);}
+  .lm-card .cardbtns .buy{background:var(--blue-light); color:var(--navy);}
+
+  .lm-filters{display:flex; gap:22px; align-items:flex-start;}
+  .lm-fside{width:220px; flex:0 0 auto;}
+  .lm-fgroup{border-bottom:1px solid var(--line); padding:16px 0;}
+  .lm-fgroup h4{font-size:13px; margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted);}
+  .lm-fgroup label{display:flex; align-items:center; gap:8px; font-size:13.5px; margin-bottom:8px; cursor:pointer;}
+  .lm-fmain{flex:1; min-width:0;}
+  .lm-toolbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;}
+  .lm-select{border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:13px; background:#fff;}
+  .lm-range{width:100%;}
+
+  .lm-empty{text-align:center; padding:70px 20px; color:var(--muted);}
+  .lm-empty .big{font-size:44px; margin-bottom:10px;}
+
+  /* ---- Product detail ---- */
+  .lm-pd{display:grid; grid-template-columns:1fr 1fr; gap:44px;}
+  .lm-pd-gallery{position:sticky; top:100px; align-self:start;}
+  .lm-pd-main{aspect-ratio:1/1; background:var(--surface); border-radius:var(--radius); overflow:hidden; margin-bottom:10px; border:1px solid var(--line);}
+  .lm-pd-main img{width:100%;height:100%;object-fit:cover;}
+  .lm-pd-thumbs{display:flex; gap:8px;}
+  .lm-pd-thumbs img{width:64px;height:64px;object-fit:cover;border-radius:8px;border:2px solid transparent; cursor:pointer;}
+  .lm-pd-thumbs img.active{border-color:var(--blue);}
+  .lm-pd-info h1{font-size:26px; margin:6px 0 8px;}
+  .lm-pd-price{display:flex; align-items:baseline; gap:10px; margin:12px 0;}
+  .lm-pd-price .cur{font-size:26px; font-weight:700; color:var(--navy);}
+  .lm-pd-price .old{font-size:16px; color:var(--muted); text-decoration:line-through;}
+  .lm-pd-price .save{font-size:12.5px; background:#FDEDED; color:var(--danger); padding:3px 8px; border-radius:6px; font-weight:700;}
+  .lm-stock-badge{font-size:12.5px; font-weight:700; padding:3px 9px; border-radius:6px; display:inline-block;}
+  .lm-stock-badge.in{background:#E8F8F0; color:var(--success);}
+  .lm-stock-badge.low{background:#FFF4E2; color:var(--warn);}
+  .lm-stock-badge.out{background:#FDEDED; color:var(--danger);}
+  .lm-varrow{margin:16px 0;}
+  .lm-varrow h5{font-size:12.5px; text-transform:uppercase; color:var(--muted); margin:0 0 8px;}
+  .lm-swatches{display:flex; gap:8px; flex-wrap:wrap;}
+  .lm-swatch{border:1px solid var(--line); border-radius:8px; padding:7px 14px; font-size:13px; background:#fff; font-weight:600;}
+  .lm-swatch.active{border-color:var(--navy); background:var(--navy); color:#fff;}
+  .lm-qtybox{display:flex; align-items:center; border:1px solid var(--line); border-radius:8px; width:fit-content;}
+  .lm-qtybox button{width:34px;height:34px;background:none;border:none;font-size:16px;}
+  .lm-qtybox span{width:38px; text-align:center; font-weight:600;}
+  .lm-pd-actionrow{display:flex; gap:10px; margin:20px 0;}
+  .lm-pd-actionrow .lm-btn{flex:1; justify-content:center;}
+  .lm-tabs{display:flex; gap:24px; border-bottom:1px solid var(--line); margin:30px 0 16px;}
+  .lm-tabs button{background:none;border:none;padding:10px 0;font-size:14px;color:var(--muted);font-weight:600;border-bottom:2px solid transparent;}
+  .lm-tabs button.active{color:var(--navy);border-color:var(--blue);}
+  .lm-review{border-bottom:1px solid var(--line); padding:14px 0;}
+  .lm-review .who{font-weight:700; font-size:13.5px;}
+  .lm-review .stars{color:var(--gold); font-size:13px; margin:2px 0 6px;}
+
+  /* ---- Cart / wishlist ---- */
+  .lm-cartlayout{display:grid; grid-template-columns:1.6fr 1fr; gap:30px; align-items:start;}
+  .lm-cartitem{display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--line); align-items:center;}
+  .lm-cartitem img{width:76px;height:76px;object-fit:cover;border-radius:8px; border:1px solid var(--line);}
+  .lm-cartitem .info{flex:1;}
+  .lm-cartitem .info .nm{font-weight:600; font-size:14px;}
+  .lm-cartitem .info .vr{font-size:12px; color:var(--muted); margin-top:2px;}
+  .lm-summary{border:1px solid var(--line); border-radius:var(--radius); padding:20px; position:sticky; top:100px;}
+  .lm-summary .row{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:10px; color:var(--muted);}
+  .lm-summary .row.total{color:var(--ink); font-weight:700; font-size:16px; border-top:1px solid var(--line); padding-top:12px; margin-top:8px;}
+  .lm-coupon{display:flex; gap:8px; margin:14px 0;}
+  .lm-coupon input{flex:1; border:1px solid var(--line); border-radius:8px; padding:9px 10px; font-size:13px;}
+
+  /* ---- Forms / auth ---- */
+  .lm-authbox{max-width:400px; margin:40px auto; border:1px solid var(--line); border-radius:14px; padding:34px;}
+  .lm-authbox h2{margin-top:0;}
+  .lm-field{margin-bottom:14px;}
+  .lm-field label{display:block; font-size:12.5px; font-weight:700; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.03em;}
+  .lm-field input, .lm-field select, .lm-field textarea{width:100%; border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:14px; font-family:inherit; outline:none;}
+  .lm-field input:focus, .lm-field select:focus, .lm-field textarea:focus{border-color:var(--blue);}
+  .lm-authswitch{font-size:13px; color:var(--muted); margin-top:14px; text-align:center;}
+  .lm-authswitch a{color:var(--blue); font-weight:700;}
+
+  /* ---- Checkout ---- */
+  .lm-steps{display:flex; gap:0; margin-bottom:30px; counter-reset:s;}
+  .lm-step{flex:1; text-align:center; position:relative; font-size:12px; color:var(--muted); font-weight:700;}
+  .lm-step .num{width:28px;height:28px;border-radius:50%;background:var(--surface); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; margin:0 auto 6px; font-size:13px;}
+  .lm-step.active .num, .lm-step.done .num{background:var(--navy); color:#fff; border-color:var(--navy);}
+  .lm-step.active{color:var(--navy);}
+  .lm-checklayout{display:grid; grid-template-columns:1.6fr 1fr; gap:30px; align-items:start;}
+  .lm-radiocard{border:1px solid var(--line); border-radius:10px; padding:14px; margin-bottom:10px; display:flex; align-items:flex-start; gap:10px; cursor:pointer;}
+  .lm-radiocard.active{border-color:var(--blue); background:var(--blue-light);}
+  .lm-radiocard .t{font-weight:700; font-size:14px;}
+  .lm-radiocard .d{font-size:12.5px; color:var(--muted); margin-top:2px;}
+
+  /* ---- Confirmation / Invoice (stamp motif) ---- */
+  .lm-confirm{max-width:640px; margin:20px auto; text-align:center;}
+  .lm-stamp{width:96px;height:96px;border:3px solid var(--success); border-radius:50%; color:var(--success); display:flex; align-items:center; justify-content:center; font-size:42px; margin:0 auto 18px; transform:rotate(-6deg);}
+  .lm-receipt{border:1px solid var(--line); border-radius:14px; margin-top:26px; text-align:left; position:relative; background:#fff;}
+  .lm-receipt .rhead{padding:22px 26px; border-bottom:1px dashed var(--line); display:flex; justify-content:space-between; align-items:flex-start;}
+  .lm-receipt .rbody{padding:22px 26px;}
+  .lm-receipt .rrow{display:flex; justify-content:space-between; font-size:13.5px; padding:6px 0;}
+  .lm-receipt .rrow.tot{font-weight:700; font-size:15px; border-top:1px solid var(--line); margin-top:8px; padding-top:12px;}
+  .lm-receipt .tear{height:2px; background:repeating-linear-gradient(90deg,var(--line) 0 8px, transparent 8px 16px); margin:0 26px;}
+  .lm-orderno{font-family:'IBM Plex Mono',monospace; letter-spacing:.03em; font-weight:700;}
+  .lm-status-pill{font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; text-transform:capitalize; display:inline-block;}
+  .lm-status-pill.pending{background:#FFF4E2;color:var(--warn);}
+  .lm-status-pill.paid, .lm-status-pill.delivered, .lm-status-pill.active{background:#E8F8F0;color:var(--success);}
+  .lm-status-pill.processing, .lm-status-pill.shipped{background:var(--blue-light);color:var(--navy);}
+  .lm-status-pill.cancelled, .lm-status-pill.failed, .lm-status-pill.inactive{background:#FDEDED;color:var(--danger);}
+  .lm-status-pill.refunded{background:#F1E9FB;color:#7A4FC7;}
+
+  .lm-track{display:flex; margin:24px 0;}
+  .lm-tstep{flex:1; text-align:center; position:relative;}
+  .lm-tstep::before{content:"";position:absolute; top:9px; left:-50%; width:100%; height:2px; background:var(--line); z-index:0;}
+  .lm-tstep:first-child::before{display:none;}
+  .lm-tstep.done::before{background:var(--success);}
+  .lm-tstep .dot{width:20px;height:20px;border-radius:50%;background:var(--line); margin:0 auto 6px; position:relative; z-index:1;}
+  .lm-tstep.done .dot{background:var(--success);}
+  .lm-tstep .lbl{font-size:11px; color:var(--muted); font-weight:600;}
+
+  /* ---- Account ---- */
+  .lm-acctlayout{display:grid; grid-template-columns:200px 1fr; gap:30px;}
+  .lm-acctnav a{display:block; padding:10px 12px; border-radius:8px; font-size:13.5px; color:var(--muted); font-weight:600; margin-bottom:4px;}
+  .lm-acctnav a.active, .lm-acctnav a:hover{background:var(--blue-light); color:var(--navy);}
+  .lm-ordrow{border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px;}
+  .lm-ordrow .top{display:flex; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:6px;}
+
+  /* ---- Admin ---- */
+  .lm-adminshell{display:grid; grid-template-columns:220px 1fr; min-height:calc(100vh - 60px);}
+  .lm-asidebar{background:var(--navy); color:#fff; padding:22px 14px;}
+  .lm-asidebar .lg{font-size:19px; font-weight:700; padding:0 10px 22px; display:flex; align-items:center; gap:6px;}
+  .lm-asidebar a{display:block; padding:10px 12px; border-radius:8px; font-size:13.5px; color:#C7D5F7; margin-bottom:2px; font-weight:600;}
+  .lm-asidebar a.active, .lm-asidebar a:hover{background:rgba(255,255,255,.12); color:#fff;}
+  .lm-amain{padding:26px 30px; background:var(--surface); min-height:100%;}
+  .lm-statgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:16px; margin-bottom:26px;}
+  .lm-statcard{background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px;}
+  .lm-statcard .lbl{font-size:12px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.03em;}
+  .lm-statcard .val{font-size:26px; font-weight:700; margin-top:6px; font-family:'Fraunces',serif;}
+  .lm-panel{background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; margin-bottom:22px;}
+  .lm-panel h3{margin:0 0 16px; font-size:16px;}
+  .lm-table{width:100%; border-collapse:collapse; font-size:13px;}
+  .lm-table th{text-align:left; color:var(--muted); font-weight:700; font-size:11.5px; text-transform:uppercase; padding:8px 10px; border-bottom:1px solid var(--line);}
+  .lm-table td{padding:10px; border-bottom:1px solid var(--line); vertical-align:middle;}
+  .lm-table img{width:38px;height:38px;object-fit:cover;border-radius:6px;}
+  .lm-table .actions{display:flex; gap:6px;}
+  .lm-iconbtn{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:5px 9px; font-size:12px;}
+  .lm-bar{height:8px; background:var(--surface); border-radius:99px; overflow:hidden;}
+  .lm-bar > div{height:100%; background:var(--blue);}
+
+  /* ---- Modal / toast / dialog ---- */
+  .lm-modal-bg{position:fixed; inset:0; background:rgba(11,20,45,.45); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px;}
+  .lm-modal{background:#fff; border-radius:14px; max-width:560px; width:100%; max-height:88vh; overflow-y:auto; padding:26px;}
+  .lm-modal h3{margin-top:0;}
+  .lm-modal .close{position:absolute; top:18px; right:18px;}
+  .lm-modalpos{position:relative;}
+  .lm-toastwrap{position:fixed; bottom:20px; right:20px; z-index:200; display:flex; flex-direction:column; gap:10px;}
+  .lm-toast{background:var(--navy); color:#fff; padding:12px 18px; border-radius:10px; font-size:13.5px; font-weight:600; box-shadow:0 8px 20px rgba(0,0,0,.15); animation:lmIn .2s ease;}
+  .lm-toast.success{background:var(--success);}
+  .lm-toast.error{background:var(--danger);}
+  @keyframes lmIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+  .lm-loading{display:flex; align-items:center; justify-content:center; padding:100px 0; color:var(--muted); font-size:14px;}
+  .lm-spin{width:30px;height:30px;border:3px solid var(--line); border-top-color:var(--blue); border-radius:50%; animation:lmspin .7s linear infinite; margin-right:10px;}
+  @keyframes lmspin{to{transform:rotate(360deg);}}
+
+  @media(max-width:880px){
+    .lm-pd{grid-template-columns:1fr;}
+    .lm-pd-gallery{position:static;}
+    .lm-cartlayout{grid-template-columns:1fr;}
+    .lm-checklayout{grid-template-columns:1fr;}
+    .lm-adminshell{grid-template-columns:1fr;}
+    .lm-asidebar{display:flex; overflow-x:auto; padding:12px;}
+    .lm-asidebar .lg{display:none;}
+    .lm-asidebar a{white-space:nowrap;}
+    .lm-acctlayout{grid-template-columns:1fr;}
+    .lm-filters{flex-direction:column;}
+    .lm-fside{width:100%;}
+    .lm-hero{flex-direction:column; text-align:center; padding:34px 22px;}
+    .lm-hero p{margin-left:auto;margin-right:auto;}
+  }
+</style>
+
+<div id="lumen-root" class="lumen"></div>
+
+<script>
+(function(){
+  const LS_ADMIN_PASS = "admin123"; // demo-only, not secure
+
+  const money = n => "$" + (Math.round(n*100)/100).toFixed(2);
+  const uid = (p="") => p + Math.random().toString(36).slice(2,9);
+  const escapeHtml = s => (s||"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const fmtDate = d => new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
+
+  // ---------------- storage helpers ----------------
+  async function sget(key, shared){
+    try{ const r = await window.storage.get(key, !!shared); return r ? JSON.parse(r.value) : null; }
+    catch(e){ return null; }
+  }
+  async function sset(key, val, shared){
+    try{ await window.storage.set(key, JSON.stringify(val), !!shared); }catch(e){ console.error('storage set failed', key, e); }
+  }
+
+  // ---------------- seed data ----------------
+  const CATEGORY_SEED = [
+    {id:'cat_watches', name:'Watches', icon:'⌚', enabled:true},
+    {id:'cat_audio', name:'Audio', icon:'🎧', enabled:true},
+    {id:'cat_bags', name:'Bags', icon:'🎒', enabled:true},
+    {id:'cat_shoes', name:'Footwear', icon:'👟', enabled:true},
+    {id:'cat_home', name:'Home', icon:'🏺', enabled:true},
+    {id:'cat_tech', name:'Tech', icon:'💻', enabled:true},
+  ];
+
+  function seedProducts(){
+    const mk = (id,name,cat,price,discount,rating,reviews,stock,sku,desc,colors,sizes,img,tag) => ({
+      id, name, category:cat, price, discount:discount||0, rating, reviewCount:reviews, stock, sku,
+      description:desc, status:'active',
+      images:[img,img,img],
+      variants:{colors:colors||[], sizes:sizes||[]},
+      tag: tag||'', createdAt: Date.now() - Math.floor(Math.random()*1e10)
+    });
+    return [
+      mk('p1','Meridian Automatic Watch','cat_watches',249,15,4.6,128,14,'WAT-MER-001','A hand-assembled automatic watch with a sapphire crystal face and stainless steel case. Water resistant to 100m.',['Silver','Black','Gold'],[],'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600','bestseller'),
+      mk('p2','Wavecore Wireless Headphones','cat_audio',179,10,4.4,96,22,'AUD-WAVE-002','Active noise cancelling over-ear headphones with 40-hour battery life and plush memory-foam ear cups.',['Black','White'],[],'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600','featured'),
+      mk('p3','Atlas Leather Weekender','cat_bags',219,0,4.8,64,9,'BAG-ATL-003','Full-grain leather weekender bag with a padded laptop sleeve and brass hardware.',['Tan','Black'],[],'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600','featured'),
+      mk('p4','Trailhead Running Shoe','cat_shoes',129,20,4.3,210,0,'SHO-TRH-004','Lightweight breathable running shoe with responsive foam cushioning.',['Grey','Blue','Red'],['7','8','9','10','11'],'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600','bestseller'),
+      mk('p5','Hearth Ceramic Vase Set','cat_home',64,0,4.7,41,30,'HOM-HEA-005','Hand-glazed ceramic vase trio, ideal for dried or fresh arrangements.',['Sand','Sage'],[],'https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=600','latest'),
+      mk('p6','Nimbus 14" Laptop Sleeve','cat_tech',39,0,4.5,58,40,'TEC-NIM-006','Water-resistant neoprene sleeve with a soft interior lining and zip pocket.',['Charcoal','Navy'],[],'https://images.unsplash.com/photo-1611078489935-0cb964de46d6?w=600','latest'),
+      mk('p7','Solstice Chrono Watch','cat_watches',329,0,4.9,73,6,'WAT-SOL-007','Chronograph dress watch with a genuine leather strap and scratch-resistant glass.',['Brown','Black'],[],'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=600','featured'),
+      mk('p8','Cove Bluetooth Speaker','cat_audio',89,12,4.2,152,17,'AUD-COV-008','Portable speaker with 360° sound and IPX7 waterproofing for 12 hours of playback.',['Black','Teal'],[],'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600','bestseller'),
+      mk('p9','Field Canvas Tote','cat_bags',54,0,4.1,29,25,'BAG-FLD-009','Rugged waxed-canvas tote with leather straps, built for daily errands.',['Olive','Natural'],[],'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600','latest'),
+      mk('p10','Ridgeline Hiking Boot','cat_shoes',159,0,4.6,88,12,'SHO-RID-010','Waterproof hiking boot with a Vibram outsole for all-terrain grip.',['Brown'],['8','9','10','11','12'],'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=600','featured'),
+      mk('p11','Lumen Desk Lamp','cat_home',72,8,4.4,37,0,'HOM-LUM-011','Dimmable LED desk lamp with a warm-to-cool color range and USB-C port.',['White','Black'],[],'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600',''),
+      mk('p12','Orbit Mechanical Keyboard','cat_tech',149,0,4.7,66,19,'TEC-ORB-012','Hot-swappable mechanical keyboard with per-key RGB and a machined aluminum frame.',['Black','White'],[],'https://images.unsplash.com/photo-1595225476474-89594b114eb9?w=600','bestseller'),
+    ];
+  }
+
+  const APP = {
+    products:[], categories:[], coupons:[], orders:[], reviews:[], users:[],
+    profile:null, cart:[], wishlist:[],
+    adminAuthed:false,
+    route:{page:'home'},
+    toasts:[],
+    ready:false,
+  };
+
+  async function loadAll(){
+    let [products, categories, coupons, orders, reviews, users] = await Promise.all([
+      sget('catalog:products', true), sget('catalog:categories', true), sget('catalog:coupons', true),
+      sget('store:orders', true), sget('store:reviews', true), sget('store:users', true),
+    ]);
+    if(!products){ products = seedProducts(); await sset('catalog:products', products, true); }
+    if(!categories){ categories = CATEGORY_SEED; await sset('catalog:categories', categories, true); }
+    if(!coupons){ coupons = [
+      {code:'WELCOME10', type:'percent', value:10, minOrder:0, maxDiscount:50, expiry:'2027-12-31', usageLimit:1000, used:0, active:true},
+      {code:'FLAT20', type:'fixed', value:20, minOrder:100, maxDiscount:20, expiry:'2027-12-31', usageLimit:500, used:0, active:true},
+    ]; await sset('catalog:coupons', coupons, true); }
+    if(!orders) orders = [];
+    if(!reviews) reviews = [
+      {id:uid('rv_'), productId:'p1', name:'Jordan K.', rating:5, text:'Keeps perfect time and looks even better in person.', approved:true, date:Date.now()-8.64e7*4},
+      {id:uid('rv_'), productId:'p2', name:'Priya S.', rating:4, text:'Great sound, ANC could be a touch stronger.', approved:true, date:Date.now()-8.64e7*9},
+    ];
+    if(!users) users = [];
+    Object.assign(APP, {products, categories, coupons, orders, reviews, users});
+
+    let [profile, cart, wishlist] = await Promise.all([
+      sget('account:profile', false), sget('account:cart', false), sget('account:wishlist', false),
+    ]);
+    APP.profile = profile; APP.cart = cart || []; APP.wishlist = wishlist || [];
+    APP.ready = true;
+  }
+
+  function persistProducts(){ return sset('catalog:products', APP.products, true); }
+  function persistCategories(){ return sset('catalog:categories', APP.categories, true); }
+  function persistCoupons(){ return sset('catalog:coupons', APP.coupons, true); }
+  function persistOrders(){ return sset('store:orders', APP.orders, true); }
+  function persistReviews(){ return sset('store:reviews', APP.reviews, true); }
+  function persistUsers(){ return sset('store:users', APP.users, true); }
+  function persistProfile(){ return sset('account:profile', APP.profile, false); }
+  function persistCart(){ return sset('account:cart', APP.cart, false); }
+  function persistWishlist(){ return sset('account:wishlist', APP.wishlist, false); }
+
+  function toast(msg, kind){
+    const id = uid('t_');
+    APP.toasts.push({id, msg, kind: kind||'info'});
+    render();
+    setTimeout(()=>{ APP.toasts = APP.toasts.filter(t=>t.id!==id); render(); }, 3200);
+  }
+
+  function nav(page, params){
+    APP.route = {page, ...params};
+    window.scrollTo(0,0);
+    render();
+  }
+
+  // ---------------- derived helpers ----------------
+  function product(id){ return APP.products.find(p=>p.id===id); }
+  function category(id){ return APP.categories.find(c=>c.id===id); }
+  function catName(id){ const c = category(id); return c? c.name : id; }
+  function cartCount(){ return APP.cart.reduce((s,i)=>s+i.qty,0); }
+  function isWished(pid){ return APP.wishlist.includes(pid); }
+  function approvedReviews(pid){ return APP.reviews.filter(r=>r.productId===pid && r.approved); }
+  function avgRating(p){
+    const rv = approvedReviews(p.id);
+    if(!rv.length) return p.rating || 0;
+    return rv.reduce((s,r)=>s+r.rating,0)/rv.length;
+  }
+  function reviewCount(p){ const rv = approvedReviews(p.id); return rv.length || p.reviewCount || 0; }
+  function finalPrice(p){ return p.discount? +(p.price * (1-p.discount/100)).toFixed(2) : p.price; }
+  function stars(n){ const full = Math.round(n); let s=''; for(let i=1;i<=5;i++) s += i<=full? '★':'☆'; return s; }
+  function stockBadge(stock){
+    if(stock<=0) return `<span class="lm-stock-badge out">Out of stock</span>`;
+    if(stock<=5) return `<span class="lm-stock-badge low">Only ${stock} left</span>`;
+    return `<span class="lm-stock-badge in">In stock</span>`;
+  }
+  function myOrders(){
+    if(!APP.profile) return [];
+    return APP.orders.filter(o=>o.customerEmail===APP.profile.email).sort((a,b)=>b.createdAt-a.createdAt);
+  }
+  function requireLogin(){
+    if(!APP.profile){ toast('Please sign in to continue','error'); nav('login'); return false; }
+    return true;
+  }
+
+  // ---------------- cart / wishlist actions ----------------
+  function variantKey(v){ return JSON.stringify(v||{}); }
+  function addToCart(pid, qty, variant){
+    qty = qty || 1;
+    const p = product(pid);
+    if(!p || p.stock<=0) { toast('This item is out of stock','error'); return; }
+    const existing = APP.cart.find(i=>i.productId===pid && variantKey(i.variant)===variantKey(variant));
+    if(existing) existing.qty += qty; else APP.cart.push({productId:pid, qty, variant:variant||{}});
+    persistCart(); toast(`Added "${p.name}" to cart`, 'success'); render();
+  }
+  function removeFromCart(pid, variant){
+    APP.cart = APP.cart.filter(i=>!(i.productId===pid && variantKey(i.variant)===variantKey(variant)));
+    persistCart(); render();
+  }
+  function setCartQty(pid, variant, qty){
+    const it = APP.cart.find(i=>i.productId===pid && variantKey(i.variant)===variantKey(variant));
+    if(!it) return;
+    it.qty = Math.max(1, qty);
+    persistCart(); render();
+  }
+  function toggleWishlist(pid){
+    if(isWished(pid)) APP.wishlist = APP.wishlist.filter(x=>x!==pid);
+    else { APP.wishlist.push(pid); toast('Added to wishlist','success'); }
+    persistWishlist(); render();
+  }
+
+  // ---------------- checkout state ----------------
+  let checkout = {
+    step:1,
+    info:{name:'', email:'', phone:''},
+    address:{line1:'', city:'', state:'', zip:'', country:''},
+    delivery:'standard',
+    payment:'cod',
+    card:{number:'', name:'', exp:'', cvv:''},
+    coupon:null,
+  };
+  function resetCheckout(){
+    checkout = {step:1,
+      info:{name:APP.profile?.name||'', email:APP.profile?.email||'', phone:APP.profile?.phone||''},
+      address: (APP.profile?.addresses||[])[0] ? {...APP.profile.addresses[0]} : {line1:'',city:'',state:'',zip:'',country:''},
+      delivery:'standard', payment:'cod', card:{number:'',name:'',exp:'',cvv:''}, coupon:null};
+  }
+  function cartTotals(couponObj){
+    const items = APP.cart.map(i=>({...i, product:product(i.productId)})).filter(i=>i.product);
+    const subtotal = items.reduce((s,i)=>s+finalPrice(i.product)*i.qty,0);
+    let discount = 0;
+    if(couponObj){
+      if(subtotal >= couponObj.minOrder){
+        discount = couponObj.type==='percent' ? subtotal*couponObj.value/100 : couponObj.value;
+        discount = Math.min(discount, couponObj.maxDiscount||discount);
+      }
+    }
+    const afterDiscount = Math.max(0, subtotal-discount);
+    const shipping = afterDiscount>0 ? (checkout.delivery==='express'? 15: (afterDiscount>75?0:6.99)) : 0;
+    const total = afterDiscount + shipping;
+    return {items, subtotal, discount, shipping, total};
+  }
+
+  function applyCoupon(code){
+    const c = APP.coupons.find(x=>x.code.toUpperCase()===code.trim().toUpperCase() && x.active);
+    if(!c){ toast('Invalid or expired coupon','error'); return; }
+    if(new Date(c.expiry) < new Date()){ toast('This coupon has expired','error'); return; }
+    if(c.used >= c.usageLimit){ toast('This coupon has reached its usage limit','error'); return; }
+    const {subtotal} = cartTotals(null);
+    if(subtotal < c.minOrder){ toast(`Minimum order of ${money(c.minOrder)} required`,'error'); return; }
+    checkout.coupon = c; toast(`Coupon "${c.code}" applied`,'success'); render();
+  }
+
+  function placeOrder(){
+    const {items, subtotal, discount, shipping, total} = cartTotals(checkout.coupon);
+    if(!items.length){ toast('Your cart is empty','error'); return; }
+    // stock check
+    for(const it of items){ if(it.product.stock < it.qty){ toast(`Not enough stock for ${it.product.name}`,'error'); return; } }
+    let paymentStatus = 'Pending';
+    if(checkout.payment==='cod') paymentStatus='Pending';
+    else{
+      // simulated gateway: card ending in 0000 simulates failure
+      paymentStatus = checkout.card.number.replace(/\s/g,'').endsWith('0000') ? 'Failed' : 'Paid';
+    }
+    if(paymentStatus==='Failed'){ toast('Payment failed — check your card details and try again','error'); return; }
+
+    const orderNo = 'LM' + Date.now().toString().slice(-8);
+    const order = {
+      id: uid('ord_'), orderNumber: orderNo,
+      customerName: checkout.info.name, customerEmail: checkout.info.email, customerPhone: checkout.info.phone,
+      address: {...checkout.address}, delivery: checkout.delivery,
+      items: items.map(i=>({productId:i.productId, name:i.product.name, sku:i.product.sku, price:finalPrice(i.product), qty:i.qty, variant:i.variant, image:i.product.images[0]})),
+      subtotal, discount, shipping, total,
+      couponCode: checkout.coupon? checkout.coupon.code : null,
+      paymentMethod: checkout.payment==='cod'?'Cash on Delivery': (checkout.payment==='card'?'Card':'Bank Transfer'),
+      paymentStatus, transactionRef: checkout.payment!=='cod' ? uid('txn_').toUpperCase() : null,
+      status: 'New',
+      createdAt: Date.now(),
+      trackingSteps: ['New','Processing','Shipped','Delivered'],
+    };
+    // decrement stock
+    items.forEach(i=>{ const p = product(i.productId); if(p) p.stock = Math.max(0, p.stock-i.qty); });
+    if(checkout.coupon){ const c = APP.coupons.find(x=>x.code===checkout.coupon.code); if(c) c.used++; persistCoupons(); }
+    APP.orders.unshift(order);
+    persistOrders(); persistProducts();
+    APP.cart = []; persistCart();
+    if(!APP.profile){
+      APP.profile = {name:checkout.info.name, email:checkout.info.email, phone:checkout.info.phone, password:'', addresses:[checkout.address]};
+      persistProfile();
+    } else if(!APP.profile.addresses?.some(a=>a.line1===checkout.address.line1)){
+      APP.profile.addresses = [...(APP.profile.addresses||[]), checkout.address]; persistProfile();
+    }
+    toast('Order placed successfully','success');
+    nav('confirmation', {orderId: order.id});
+  }
+
+  // ---------------- auth (demo) ----------------
+  function signup(data){
+    if(APP.users.some(u=>u.email===data.email)){ toast('An account with this email already exists','error'); return; }
+    APP.users.push({...data});
+    persistUsers();
+    APP.profile = {name:data.name, email:data.email, phone:data.phone||'', password:data.password, addresses:[]};
+    persistProfile();
+    toast('Account created — welcome!','success');
+    nav('account', {tab:'profile'});
+  }
+  function login(email, password){
+    const u = APP.users.find(u=>u.email===email && u.password===password);
+    if(!u){ toast('Incorrect email or password','error'); return; }
+    APP.profile = {name:u.name, email:u.email, phone:u.phone||'', password:u.password, addresses:APP.profile?.addresses||[]};
+    persistProfile();
+    toast(`Welcome back, ${u.name.split(' ')[0]}`,'success');
+    nav('account', {tab:'profile'});
+  }
+  function logout(){ APP.profile=null; persistProfile(); toast('Signed out'); nav('home'); }
+
+  // ================= RENDER =================
+  function render(){
+    const root = document.getElementById('lumen-root');
+    if(!APP.ready){ root.innerHTML = `<div class="lm-loading"><div class="lm-spin"></div>Loading store…</div>`; return; }
+    const page = APP.route.page;
+    let body = '';
+    if(page==='admin' || page==='admin-login') body = renderAdmin();
+    else body = header() + `<div class="lm-wrap">${renderPage()}</div>`;
+    body += toastWrap();
+    root.innerHTML = body;
+    bindEvents();
+  }
+
+  function toastWrap(){
+    return `<div class="lm-toastwrap">${APP.toasts.map(t=>`<div class="lm-toast ${t.kind}">${escapeHtml(t.msg)}</div>`).join('')}</div>`;
+  }
+
+  function header(){
+    const cats = APP.categories.filter(c=>c.enabled);
+    return `
+    <div class="lm-header">
+      <div class="lm-headtop">
+        <div class="lm-logo" data-nav="home"><span class="dot"></span>LUMEN</div>
+        <div class="lm-search">
+          <span>🔍</span>
+          <input id="lm-search-input" placeholder="Search products, SKU or category…" value="${escapeHtml(APP.route.page==='shop'?(APP.route.q||''):'')}"/>
+        </div>
+        <div class="lm-navicons">
+          <button class="lm-icon-btn" data-nav="wishlist" title="Wishlist">♡${APP.wishlist.length?`<span class="lm-badge">${APP.wishlist.length}</span>`:''}</button>
+          <button class="lm-icon-btn" data-nav="cart" title="Cart">🛒${cartCount()?`<span class="lm-badge">${cartCount()}</span>`:''}</button>
+          <button class="lm-icon-btn" data-nav="${APP.profile?'account':'login'}" title="Account">👤</button>
+        </div>
+      </div>
+      <div class="lm-navrow">
+        <a data-nav="home" class="${APP.route.page==='home'?'active':''}">Home</a>
+        <a data-nav="shop" class="${APP.route.page==='shop'&&!APP.route.cat?'active':''}">Shop All</a>
+        ${cats.map(c=>`<a data-nav="shop" data-cat="${c.id}" class="${APP.route.cat===c.id?'active':''}">${escapeHtml(c.name)}</a>`).join('')}
+        <a data-nav="admin-login" style="margin-left:auto;">Admin</a>
+      </div>
+    </div>`;
+  }
+
+  function renderPage(){
+    switch(APP.route.page){
+      case 'home': return pageHome();
+      case 'shop': return pageShop();
+      case 'product': return pageProduct();
+      case 'cart': return pageCart();
+      case 'wishlist': return pageWishlist();
+      case 'login': return pageAuth('login');
+      case 'signup': return pageAuth('signup');
+      case 'account': return pageAccount();
+      case 'checkout': return pageCheckout();
+      case 'confirmation': return pageConfirmation();
+      case 'invoice': return pageInvoice();
+      default: return pageHome();
+    }
+  }
+
+  function productCard(p){
+    const fp = finalPrice(p);
+    return `<div class="lm-card">
+      <div class="thumb" data-nav="product" data-id="${p.id}">
+        ${p.discount?`<span class="disc-tag">-${p.discount}%</span>`:''}
+        <button class="fav ${isWished(p.id)?'active':''}" data-wish="${p.id}">${isWished(p.id)?'♥':'♡'}</button>
+        <img src="${p.images[0]}" alt="${escapeHtml(p.name)}" loading="lazy"/>
+      </div>
+      <div class="body">
+        <div class="cat">${escapeHtml(catName(p.category))}</div>
+        <div class="name" data-nav="product" data-id="${p.id}">${escapeHtml(p.name)}</div>
+        <div class="stars">${stars(avgRating(p))} <span class="cnt">(${reviewCount(p)})</span></div>
+        <div class="price-row">
+          <span class="price">${money(fp)}</span>
+          ${p.discount?`<span class="old">${money(p.price)}</span>`:''}
+        </div>
+        ${p.stock<=0?`<span class="stock-out">Out of stock</span>`:''}
+        <div class="cardbtns">
+          <button class="add" data-addcart="${p.id}" ${p.stock<=0?'disabled':''}>Add to Cart</button>
+          <button class="buy" data-buynow="${p.id}" ${p.stock<=0?'disabled':''}>Buy Now</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function pageHome(){
+    const active = APP.products.filter(p=>p.status==='active');
+    const featured = active.filter(p=>p.tag==='featured').slice(0,4);
+    const latest = [...active].sort((a,b)=>b.createdAt-a.createdAt).slice(0,4);
+    const best = active.filter(p=>p.tag==='bestseller').slice(0,4);
+    return `
+      <div class="lm-hero">
+        <div>
+          <div class="eyebrow">New Season Arrivals</div>
+          <h1>Considered goods for everyday life.</h1>
+          <p>Watches, audio, bags and more — chosen for craft, not clutter. Free shipping on orders over $75.</p>
+          <div style="display:flex;gap:10px;">
+            <button class="lm-btn" data-nav="shop">Shop All <span>→</span></button>
+            <button class="lm-btn ghost" data-nav="shop" data-cat="cat_watches">Explore Watches</button>
+          </div>
+        </div>
+      </div>
+      <div class="lm-catstrip">
+        ${APP.categories.filter(c=>c.enabled).map(c=>`
+          <div class="lm-cat-chip" data-nav="shop" data-cat="${c.id}">
+            <div class="img">${c.image?`<img src="${c.image}"/>`:c.icon}</div>
+            <span>${escapeHtml(c.name)}</span>
+          </div>`).join('')}
+      </div>
+      <div class="lm-sechead"><h2>Featured Products</h2><a data-nav="shop">View all →</a></div>
+      <div class="lm-grid">${featured.map(productCard).join('') || emptyRow('No featured products yet.')}</div>
+      <div class="lm-sechead"><h2>Best Sellers</h2><a data-nav="shop">View all →</a></div>
+      <div class="lm-grid">${best.map(productCard).join('') || emptyRow('No best sellers yet.')}</div>
+      <div class="lm-sechead"><h2>Latest Arrivals</h2><a data-nav="shop">View all →</a></div>
+      <div class="lm-grid">${latest.map(productCard).join('') || emptyRow('No products yet.')}</div>
+    `;
+  }
+  function emptyRow(msg){ return `<div class="lm-empty" style="grid-column:1/-1;">${msg}</div>`; }
+
+  function pageShop(){
+    const r = APP.route;
+    const filters = r.filters || {cat: r.cat||'', min:'', max:'', rating:'', sort:'relevance'};
+    r.filters = filters;
+    let list = APP.products.filter(p=>p.status==='active');
+    if(r.q) {
+      const q = r.q.toLowerCase();
+      list = list.filter(p=>p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q) || catName(p.category).toLowerCase().includes(q));
+    }
+    if(filters.cat) list = list.filter(p=>p.category===filters.cat);
+    if(filters.min) list = list.filter(p=>finalPrice(p) >= +filters.min);
+    if(filters.max) list = list.filter(p=>finalPrice(p) <= +filters.max);
+    if(filters.rating) list = list.filter(p=>avgRating(p) >= +filters.rating);
+    if(filters.sort==='price-asc') list.sort((a,b)=>finalPrice(a)-finalPrice(b));
+    else if(filters.sort==='price-desc') list.sort((a,b)=>finalPrice(b)-finalPrice(a));
+    else if(filters.sort==='rating') list.sort((a,b)=>avgRating(b)-avgRating(a));
+    else if(filters.sort==='newest') list.sort((a,b)=>b.createdAt-a.createdAt);
+
+    return `
+    <div class="lm-toolbar">
+      <h2 style="margin:0;">${r.q? `Results for "${escapeHtml(r.q)}"` : (filters.cat? catName(filters.cat) : 'Shop All')} <span style="color:var(--muted);font-size:14px;font-weight:400;">(${list.length})</span></h2>
+      <select class="lm-select" id="lm-sort">
+        <option value="relevance" ${filters.sort==='relevance'?'selected':''}>Sort: Relevance</option>
+        <option value="price-asc" ${filters.sort==='price-asc'?'selected':''}>Price: Low to High</option>
+        <option value="price-desc" ${filters.sort==='price-desc'?'selected':''}>Price: High to Low</option>
+        <option value="rating" ${filters.sort==='rating'?'selected':''}>Highest Rated</option>
+        <option value="newest" ${filters.sort==='newest'?'selected':''}>Newest</option>
+      </select>
+    </div>
+    <div class="lm-filters">
+      <div class="lm-fside">
+        <div class="lm-fgroup">
+          <h4>Category</h4>
+          <label><input type="radio" name="fcat" value="" ${!filters.cat?'checked':''}/> All</label>
+          ${APP.categories.filter(c=>c.enabled).map(c=>`<label><input type="radio" name="fcat" value="${c.id}" ${filters.cat===c.id?'checked':''}/> ${escapeHtml(c.name)}</label>`).join('')}
+        </div>
+        <div class="lm-fgroup">
+          <h4>Price</h4>
+          <div style="display:flex;gap:6px;">
+            <input class="lm-select" id="fmin" placeholder="Min" style="width:50%;" value="${filters.min}"/>
+            <input class="lm-select" id="fmax" placeholder="Max" style="width:50%;" value="${filters.max}"/>
+          </div>
+        </div>
+        <div class="lm-fgroup">
+          <h4>Rating</h4>
+          <label><input type="radio" name="frating" value="" ${!filters.rating?'checked':''}/> Any</label>
+          ${[4,3,2].map(n=>`<label><input type="radio" name="frating" value="${n}" ${filters.rating==String(n)?'checked':''}/> ${n}★ &amp; up</label>`).join('')}
+        </div>
+      </div>
+      <div class="lm-fmain">
+        <div class="lm-grid">${list.map(productCard).join('') || `<div class="lm-empty" style="grid-column:1/-1;"><div class="big">🔍</div>No products found. Try adjusting your filters.</div>`}</div>
+      </div>
+    </div>`;
+  }
+
+  function pageProduct(){
+    const p = product(APP.route.id);
+    if(!p) return `<div class="lm-empty">Product not found.</div>`;
+    const st = APP.route.pstate || {img:0, color:p.variants.colors[0]||null, size:p.variants.sizes[0]||null, qty:1, tab:'desc'};
+    APP.route.pstate = st;
+    const fp = finalPrice(p);
+    const rv = approvedReviews(p.id);
+    const related = APP.products.filter(x=>x.category===p.category && x.id!==p.id && x.status==='active').slice(0,4);
+    return `
+    <div class="lm-pd">
+      <div class="lm-pd-gallery">
+        <div class="lm-pd-main"><img src="${p.images[st.img]}"/></div>
+        <div class="lm-pd-thumbs">${p.images.map((im,i)=>`<img src="${im}" class="${i===st.img?'active':''}" data-thumb="${i}"/>`).join('')}</div>
+      </div>
+      <div class="lm-pd-info">
+        <div class="cat" style="font-size:12px;color:var(--muted);text-transform:uppercase;">${escapeHtml(catName(p.category))} · SKU ${p.sku}</div>
+        <h1>${escapeHtml(p.name)}</h1>
+        <div class="stars">${stars(avgRating(p))} <span style="color:var(--muted);">(${rv.length} reviews)</span></div>
+        <div class="lm-pd-price">
+          <span class="cur">${money(fp)}</span>
+          ${p.discount?`<span class="old">${money(p.price)}</span><span class="save">Save ${p.discount}%</span>`:''}
+        </div>
+        ${stockBadge(p.stock)}
+        <p style="color:var(--muted);font-size:14px;margin-top:14px;">${escapeHtml(p.description)}</p>
+        ${p.variants.colors.length?`<div class="lm-varrow"><h5>Color</h5><div class="lm-swatches">${p.variants.colors.map(c=>`<button class="lm-swatch ${st.color===c?'active':''}" data-setcolor="${c}">${c}</button>`).join('')}</div></div>`:''}
+        ${p.variants.sizes.length?`<div class="lm-varrow"><h5>Size</h5><div class="lm-swatches">${p.variants.sizes.map(s=>`<button class="lm-swatch ${st.size===s?'active':''}" data-setsize="${s}">${s}</button>`).join('')}</div></div>`:''}
+        <div class="lm-varrow">
+          <h5>Quantity</h5>
+          <div class="lm-qtybox"><button data-qty="-1">−</button><span>${st.qty}</span><button data-qty="1">+</button></div>
+        </div>
+        <div class="lm-pd-actionrow">
+          <button class="lm-btn outline" data-addcart-detail="1" ${p.stock<=0?'disabled':''}>Add to Cart</button>
+          <button class="lm-btn" data-buynow-detail="1" ${p.stock<=0?'disabled':''}>Buy Now</button>
+          <button class="lm-btn subtle" data-wish="${p.id}" style="flex:0 0 auto;">${isWished(p.id)?'♥ Saved':'♡ Wishlist'}</button>
+        </div>
+        <div class="lm-tabs">
+          <button class="${st.tab==='desc'?'active':''}" data-tab="desc">Description</button>
+          <button class="${st.tab==='reviews'?'active':''}" data-tab="reviews">Reviews (${rv.length})</button>
+        </div>
+        ${st.tab==='desc'? `<p style="font-size:14px;color:var(--muted);">${escapeHtml(p.description)} Crafted with attention to detail and backed by our 30-day return policy.</p>` : renderReviewsTab(p)}
+      </div>
+    </div>
+    ${related.length?`<div class="lm-sechead" style="margin-top:50px;"><h2>Related Products</h2></div><div class="lm-grid">${related.map(productCard).join('')}</div>`:''}
+    `;
+  }
+
+  function renderReviewsTab(p){
+    const rv = approvedReviews(p.id);
+    return `
+      <div>
+        ${rv.map(r=>`<div class="lm-review"><div class="who">${escapeHtml(r.name)}</div><div class="stars">${stars(r.rating)}</div><div style="font-size:13.5px;">${escapeHtml(r.text)}</div></div>`).join('') || '<p style="color:var(--muted);font-size:13.5px;">No reviews yet — be the first to share your thoughts.</p>'}
+        <div style="margin-top:18px;">
+          <h5 style="font-size:12.5px;text-transform:uppercase;color:var(--muted);">Write a review</h5>
+          <div class="lm-field"><label>Rating</label>
+            <select class="lm-select" id="rv-rating">${[5,4,3,2,1].map(n=>`<option value="${n}">${n} star${n>1?'s':''}</option>`).join('')}</select>
+          </div>
+          <div class="lm-field"><textarea id="rv-text" rows="3" placeholder="Share your experience with this product…"></textarea></div>
+          <button class="lm-btn small" id="rv-submit" data-pid="${p.id}">Submit Review</button>
+        </div>
+      </div>`;
+  }
+
+  function pageCart(){
+    const {items, subtotal, discount, shipping, total} = cartTotals(checkout.coupon);
+    if(!items.length) return `<div class="lm-empty"><div class="big">🛒</div><h3>Your cart is empty</h3><p>Add something you'll love.</p><button class="lm-btn" data-nav="shop">Continue Shopping</button></div>`;
+    return `<h1 style="font-size:26px;">Shopping Cart</h1>
+    <div class="lm-cartlayout">
+      <div>
+        ${items.map(i=>`
+          <div class="lm-cartitem">
+            <img src="${i.product.images[0]}"/>
+            <div class="info">
+              <div class="nm" data-nav="product" data-id="${i.product.id}">${escapeHtml(i.product.name)}</div>
+              <div class="vr">${Object.values(i.variant||{}).filter(Boolean).join(' / ') || '—'} · ${money(finalPrice(i.product))} each</div>
+              <div class="lm-qtybox" style="margin-top:8px;">
+                <button data-cartqty="-1" data-cid="${i.productId}" data-cvar='${escapeHtml(variantKey(i.variant))}'>−</button>
+                <span>${i.qty}</span>
+                <button data-cartqty="1" data-cid="${i.productId}" data-cvar='${escapeHtml(variantKey(i.variant))}'>+</button>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-weight:700;">${money(finalPrice(i.product)*i.qty)}</div>
+              <button class="lm-iconbtn" style="margin-top:8px;" data-cartremove="${i.productId}" data-cvar='${escapeHtml(variantKey(i.variant))}'>Remove</button>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div class="lm-summary">
+        <div class="lm-coupon"><input id="coupon-input" placeholder="Coupon code" value="${checkout.coupon?checkout.coupon.code:''}"/><button class="lm-btn small" id="apply-coupon">Apply</button></div>
+        <div class="row"><span>Subtotal</span><span>${money(subtotal)}</span></div>
+        ${discount>0?`<div class="row"><span>Discount</span><span>-${money(discount)}</span></div>`:''}
+        <div class="row"><span>Shipping</span><span>${shipping===0?'Free':money(shipping)}</span></div>
+        <div class="row total"><span>Total</span><span>${money(total)}</span></div>
+        <button class="lm-btn" style="width:100%;justify-content:center;margin-top:14px;" id="go-checkout">Proceed to Checkout</button>
+      </div>
+    </div>`;
+  }
+
+  function pageWishlist(){
+    const list = APP.wishlist.map(id=>product(id)).filter(Boolean);
+    if(!list.length) return `<div class="lm-empty"><div class="big">♡</div><h3>Your wishlist is empty</h3><p>Save items you love for later.</p><button class="lm-btn" data-nav="shop">Browse Products</button></div>`;
+    return `<h1 style="font-size:26px;">Wishlist</h1><div class="lm-grid">${list.map(productCard).join('')}</div>`;
+  }
+
+  function pageAuth(mode){
+    if(mode==='login'){
+      return `<div class="lm-authbox">
+        <h2>Welcome back</h2>
+        <div class="lm-field"><label>Email</label><input id="lg-email" type="email" placeholder="you@example.com"/></div>
+        <div class="lm-field"><label>Password</label><input id="lg-pass" type="password" placeholder="••••••••"/></div>
+        <button class="lm-btn" style="width:100%;justify-content:center;" id="do-login">Log In</button>
+        <div class="lm-authswitch">New here? <a data-nav="signup">Create an account</a></div>
+        <div class="lm-authswitch"><a href="#" id="forgot-pass">Forgot password?</a></div>
+      </div>`;
+    }
+    return `<div class="lm-authbox">
+      <h2>Create your account</h2>
+      <div class="lm-field"><label>Full name</label><input id="su-name" placeholder="Jane Doe"/></div>
+      <div class="lm-field"><label>Email</label><input id="su-email" type="email" placeholder="you@example.com"/></div>
+      <div class="lm-field"><label>Phone</label><input id="su-phone" placeholder="+1 555 000 0000"/></div>
+      <div class="lm-field"><label>Password</label><input id="su-pass" type="password" placeholder="Min 6 characters"/></div>
+      <button class="lm-btn" style="width:100%;justify-content:center;" id="do-signup">Sign Up</button>
+      <div class="lm-authswitch">Already have an account? <a data-nav="login">Log in</a></div>
+    </div>`;
+  }
+
+  function pageAccount(){
+    if(!APP.profile) { nav('login'); return ''; }
+    const tab = APP.route.tab || 'profile';
+    const orders = myOrders();
+    let content = '';
+    if(tab==='profile'){
+      content = `<div class="lm-panel">
+        <h3>Profile</h3>
+        <div class="lm-field"><label>Name</label><input id="pf-name" value="${escapeHtml(APP.profile.name)}"/></div>
+        <div class="lm-field"><label>Email</label><input id="pf-email" value="${escapeHtml(APP.profile.email)}" disabled/></div>
+        <div class="lm-field"><label>Phone</label><input id="pf-phone" value="${escapeHtml(APP.profile.phone||'')}"/></div>
+        <button class="lm-btn small" id="save-profile">Save Changes</button>
+      </div>
+      <div class="lm-panel">
+        <h3>Change Password</h3>
+        <div class="lm-field"><label>New Password</label><input id="pf-newpass" type="password" placeholder="Min 6 characters"/></div>
+        <button class="lm-btn small" id="save-pass">Update Password</button>
+      </div>`;
+    } else if(tab==='addresses'){
+      content = `<div class="lm-panel"><h3>Saved Addresses</h3>
+        ${(APP.profile.addresses||[]).map((a,i)=>`<div class="lm-ordrow"><div>${escapeHtml(a.line1)}, ${escapeHtml(a.city)}, ${escapeHtml(a.state)} ${escapeHtml(a.zip)}, ${escapeHtml(a.country)}</div><button class="lm-iconbtn" style="margin-top:8px;" data-deladdr="${i}">Remove</button></div>`).join('') || '<p style="color:var(--muted);">No saved addresses yet.</p>'}
+        <h4 style="font-size:13px;margin-top:18px;">Add Address</h4>
+        <div class="lm-field"><input id="ad-line1" placeholder="Street address"/></div>
+        <div style="display:flex;gap:8px;"><input class="lm-select" id="ad-city" placeholder="City"/><input class="lm-select" id="ad-state" placeholder="State"/></div>
+        <div style="display:flex;gap:8px;margin-top:8px;"><input class="lm-select" id="ad-zip" placeholder="ZIP"/><input class="lm-select" id="ad-country" placeholder="Country"/></div>
+        <button class="lm-btn small" style="margin-top:10px;" id="add-address">Add Address</button>
+      </div>`;
+    } else if(tab==='orders'){
+      content = `<div class="lm-panel"><h3>Order History</h3>
+        ${orders.map(o=>orderRow(o)).join('') || '<p style="color:var(--muted);">You have no orders yet.</p>'}
+      </div>`;
+    } else if(tab==='wishlist'){
+      const list = APP.wishlist.map(id=>product(id)).filter(Boolean);
+      content = `<div class="lm-panel"><h3>Wishlist</h3><div class="lm-grid">${list.map(productCard).join('') || '<p style="color:var(--muted);">Empty.</p>'}</div></div>`;
+    } else if(tab==='payments'){
+      content = `<div class="lm-panel"><h3>Payment History</h3>
+        <table class="lm-table"><thead><tr><th>Order</th><th>Method</th><th>Status</th><th>Amount</th><th>Date</th></tr></thead><tbody>
+        ${orders.map(o=>`<tr><td class="mono">${o.orderNumber}</td><td>${o.paymentMethod}</td><td><span class="lm-status-pill ${o.paymentStatus.toLowerCase()}">${o.paymentStatus}</span></td><td>${money(o.total)}</td><td>${fmtDate(o.createdAt)}</td></tr>`).join('') || `<tr><td colspan="5" style="color:var(--muted);">No payments yet.</td></tr>`}
+        </tbody></table>
+      </div>`;
+    }
+    return `<div class="lm-acctlayout">
+      <div class="lm-acctnav">
+        <a data-nav="account" data-tab="profile" class="${tab==='profile'?'active':''}">Profile</a>
+        <a data-nav="account" data-tab="addresses" class="${tab==='addresses'?'active':''}">Addresses</a>
+        <a data-nav="account" data-tab="orders" class="${tab==='orders'?'active':''}">Order History</a>
+        <a data-nav="account" data-tab="wishlist" class="${tab==='wishlist'?'active':''}">Wishlist</a>
+        <a data-nav="account" data-tab="payments" class="${tab==='payments'?'active':''}">Payments</a>
+        <a href="#" id="do-logout">Log Out</a>
+      </div>
+      <div>${content}</div>
+    </div>`;
+  }
+
+  const TRACK_STAGES = ['New','Processing','Shipped','Delivered'];
+  function orderRow(o){
+    const cancellable = ['New','Processing'].includes(o.status);
+    const stageIdx = TRACK_STAGES.indexOf(o.status);
+    return `<div class="lm-ordrow">
+      <div class="top">
+        <div><span class="lm-orderno">${o.orderNumber}</span> <span style="color:var(--muted);font-size:12.5px;">· ${fmtDate(o.createdAt)}</span></div>
+        <div><span class="lm-status-pill ${o.status.toLowerCase()}">${o.status}</span> <span class="lm-status-pill ${o.paymentStatus.toLowerCase()}">${o.paymentStatus}</span></div>
+      </div>
+      <div style="font-size:13px;color:var(--muted);">${o.items.map(i=>i.name+' ×'+i.qty).join(', ')}</div>
+      ${o.status!=='Cancelled' ? `<div class="lm-track">${TRACK_STAGES.map((s,i)=>`<div class="lm-tstep ${i<=stageIdx?'done':''}"><div class="dot"></div><div class="lbl">${s}</div></div>`).join('')}</div>` : ''}
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">
+        <div style="font-weight:700;">${money(o.total)}</div>
+        <div style="display:flex;gap:8px;">
+          <button class="lm-btn small outline" data-nav="invoice" data-id="${o.id}">Invoice</button>
+          ${cancellable? `<button class="lm-btn small danger" data-cancelorder="${o.id}">Cancel Order</button>`:''}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function pageCheckout(){
+    if(!APP.cart.length) return `<div class="lm-empty">Your cart is empty. <button class="lm-btn" data-nav="shop">Shop Now</button></div>`;
+    const steps = ['Information','Shipping','Delivery','Review','Payment'];
+    const s = checkout.step;
+    const {items, subtotal, discount, shipping, total} = cartTotals(checkout.coupon);
+    let stepBody = '';
+    if(s===1){
+      stepBody = `<div class="lm-panel"><h3>Customer Information</h3>
+        <div class="lm-field"><label>Full Name</label><input id="co-name" value="${escapeHtml(checkout.info.name)}"/></div>
+        <div class="lm-field"><label>Email</label><input id="co-email" type="email" value="${escapeHtml(checkout.info.email)}"/></div>
+        <div class="lm-field"><label>Phone</label><input id="co-phone" value="${escapeHtml(checkout.info.phone)}"/></div>
+      </div>`;
+    } else if(s===2){
+      stepBody = `<div class="lm-panel"><h3>Shipping Address</h3>
+        <div class="lm-field"><label>Street Address</label><input id="co-line1" value="${escapeHtml(checkout.address.line1)}"/></div>
+        <div style="display:flex;gap:10px;"><div class="lm-field" style="flex:1;"><label>City</label><input id="co-city" value="${escapeHtml(checkout.address.city)}"/></div><div class="lm-field" style="flex:1;"><label>State</label><input id="co-state" value="${escapeHtml(checkout.address.state)}"/></div></div>
+        <div style="display:flex;gap:10px;"><div class="lm-field" style="flex:1;"><label>ZIP</label><input id="co-zip" value="${escapeHtml(checkout.address.zip)}"/></div><div class="lm-field" style="flex:1;"><label>Country</label><input id="co-country" value="${escapeHtml(checkout.address.country)}"/></div></div>
+      </div>`;
+    } else if(s===3){
+      stepBody = `<div class="lm-panel"><h3>Delivery Method</h3>
+        <div class="lm-radiocard ${checkout.delivery==='standard'?'active':''}" data-delivery="standard"><div><div class="t">Standard Shipping</div><div class="d">4–6 business days · ${subtotal>75?'Free':'$6.99'}</div></div></div>
+        <div class="lm-radiocard ${checkout.delivery==='express'?'active':''}" data-delivery="express"><div><div class="t">Express Shipping</div><div class="d">1–2 business days · $15.00</div></div></div>
+      </div>`;
+    } else if(s===4){
+      stepBody = `<div class="lm-panel"><h3>Order Summary</h3>
+        ${items.map(i=>`<div class="lm-cartitem"><img src="${i.product.images[0]}"/><div class="info"><div class="nm">${escapeHtml(i.product.name)}</div><div class="vr">Qty ${i.qty}</div></div><div>${money(finalPrice(i.product)*i.qty)}</div></div>`).join('')}
+      </div>`;
+    } else if(s===5){
+      stepBody = `<div class="lm-panel"><h3>Payment Method</h3>
+        <div class="lm-radiocard ${checkout.payment==='cod'?'active':''}" data-payment="cod"><div><div class="t">Cash on Delivery</div><div class="d">Pay when your order arrives</div></div></div>
+        <div class="lm-radiocard ${checkout.payment==='card'?'active':''}" data-payment="card"><div><div class="t">Credit / Debit Card</div><div class="d">Processed securely — we never store your card details</div></div></div>
+        <div class="lm-radiocard ${checkout.payment==='bank'?'active':''}" data-payment="bank"><div><div class="t">Bank Transfer</div><div class="d">Pay via your bank's payment gateway</div></div></div>
+        ${checkout.payment==='card'? `
+        <div style="margin-top:14px;">
+          <div class="lm-field"><label>Card Number</label><input id="cc-num" placeholder="4242 4242 4242 4242" value="${escapeHtml(checkout.card.number)}"/></div>
+          <div style="display:flex;gap:10px;">
+            <div class="lm-field" style="flex:1;"><label>Name on Card</label><input id="cc-name" value="${escapeHtml(checkout.card.name)}"/></div>
+            <div class="lm-field" style="width:90px;"><label>Exp</label><input id="cc-exp" placeholder="MM/YY" value="${escapeHtml(checkout.card.exp)}"/></div>
+            <div class="lm-field" style="width:80px;"><label>CVV</label><input id="cc-cvv" placeholder="123" value="${escapeHtml(checkout.card.cvv)}" type="password"/></div>
+          </div>
+          <p style="font-size:11.5px;color:var(--muted);">Demo gateway: any card succeeds; a number ending in 0000 simulates a failed payment. No card data is stored.</p>
+        </div>`:''}
+      </div>`;
+    }
+    return `
+    <div class="lm-steps">${steps.map((t,i)=>`<div class="lm-step ${i+1===s?'active':i+1<s?'done':''}"><div class="num">${i+1<s?'✓':i+1}</div>${t}</div>`).join('')}</div>
+    <div class="lm-checklayout">
+      <div>
+        ${stepBody}
+        <div style="display:flex;justify-content:space-between;">
+          ${s>1?`<button class="lm-btn outline" id="co-back">Back</button>`:'<span></span>'}
+          ${s<5?`<button class="lm-btn" id="co-next">Continue</button>`:`<button class="lm-btn" id="co-place">Place Order</button>`}
+        </div>
+      </div>
+      <div class="lm-summary">
+        <h3 style="margin-top:0;font-size:15px;">Order Summary</h3>
+        <div class="row"><span>Subtotal</span><span>${money(subtotal)}</span></div>
+        ${discount>0?`<div class="row"><span>Discount ${checkout.coupon?`(${checkout.coupon.code})`:''}</span><span>-${money(discount)}</span></div>`:''}
+        <div class="row"><span>Shipping</span><span>${shipping===0?'Free':money(shipping)}</span></div>
+        <div class="row total"><span>Total</span><span>${money(total)}</span></div>
+      </div>
+    </div>`;
+  }
+
+  function pageConfirmation(){
+    const o = APP.orders.find(x=>x.id===APP.route.orderId);
+    if(!o) return `<div class="lm-empty">Order not found.</div>`;
+    return `<div class="lm-confirm">
+      <div class="lm-stamp">✓</div>
+      <h1>Order Confirmed</h1>
+      <p style="color:var(--muted);">Thank you, ${escapeHtml(o.customerName.split(' ')[0])}. Your order <span class="lm-orderno">${o.orderNumber}</span> has been placed.</p>
+      ${receiptBlock(o)}
+      <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;">
+        <button class="lm-btn outline" data-nav="invoice" data-id="${o.id}">View Invoice</button>
+        <button class="lm-btn" data-nav="account" data-tab="orders">Track Order</button>
+      </div>
+    </div>`;
+  }
+
+  function receiptBlock(o){
+    return `<div class="lm-receipt">
+      <div class="rhead">
+        <div><div style="font-weight:700;">LUMEN</div><div style="font-size:12px;color:var(--muted);">Order ${o.orderNumber}</div></div>
+        <div style="text-align:right;"><span class="lm-status-pill ${o.paymentStatus.toLowerCase()}">${o.paymentStatus}</span><div style="font-size:11.5px;color:var(--muted);margin-top:4px;">${fmtDate(o.createdAt)}</div></div>
+      </div>
+      <div class="rbody">
+        ${o.items.map(i=>`<div class="rrow"><span>${escapeHtml(i.name)} ×${i.qty}</span><span>${money(i.price*i.qty)}</span></div>`).join('')}
+      </div>
+      <div class="tear"></div>
+      <div class="rbody">
+        <div class="rrow"><span>Subtotal</span><span>${money(o.subtotal)}</span></div>
+        ${o.discount>0?`<div class="rrow"><span>Discount</span><span>-${money(o.discount)}</span></div>`:''}
+        <div class="rrow"><span>Shipping</span><span>${o.shipping===0?'Free':money(o.shipping)}</span></div>
+        <div class="rrow tot"><span>Total</span><span>${money(o.total)}</span></div>
+      </div>
+    </div>`;
+  }
+
+  function pageInvoice(){
+    const o = APP.orders.find(x=>x.id===APP.route.id);
+    if(!o) return `<div class="lm-empty">Invoice not found.</div>`;
+    return `<div class="lm-confirm" style="max-width:680px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h1 style="font-size:22px;">Invoice</h1>
+        <div style="display:flex;gap:8px;">
+          <button class="lm-btn small outline" id="print-invoice">🖨 Print</button>
+          <button class="lm-btn small" id="download-invoice">⬇ Download</button>
+        </div>
+      </div>
+      <div class="lm-receipt" style="text-align:left;">
+        <div class="rhead">
+          <div>
+            <div style="font-weight:700;font-size:16px;">LUMEN</div>
+            <div style="font-size:12px;color:var(--muted);">Invoice #INV-${o.orderNumber}</div>
+            <div style="font-size:12px;color:var(--muted);">Order #${o.orderNumber} · ${fmtDate(o.createdAt)}</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-weight:700;font-size:13px;">${escapeHtml(o.customerName)}</div>
+            <div style="font-size:12px;color:var(--muted);">${escapeHtml(o.address.line1)}<br/>${escapeHtml(o.address.city)}, ${escapeHtml(o.address.state)} ${escapeHtml(o.address.zip)}<br/>${escapeHtml(o.address.country)}</div>
+          </div>
+        </div>
+        <div class="rbody">
+          <table class="lm-table"><thead><tr><th>Item</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>
+          ${o.items.map(i=>`<tr><td>${escapeHtml(i.name)}</td><td>${i.qty}</td><td>${money(i.price)}</td><td>${money(i.price*i.qty)}</td></tr>`).join('')}
+          </tbody></table>
+        </div>
+        <div class="tear"></div>
+        <div class="rbody">
+          <div class="rrow"><span>Subtotal</span><span>${money(o.subtotal)}</span></div>
+          ${o.discount>0?`<div class="rrow"><span>Discount</span><span>-${money(o.discount)}</span></div>`:''}
+          <div class="rrow"><span>Shipping</span><span>${o.shipping===0?'Free':money(o.shipping)}</span></div>
+          <div class="rrow tot"><span>Total Due</span><span>${money(o.total)}</span></div>
+          <div class="rrow" style="margin-top:10px;"><span>Payment Method</span><span>${o.paymentMethod}</span></div>
+          <div class="rrow"><span>Payment Status</span><span class="lm-status-pill ${o.paymentStatus.toLowerCase()}">${o.paymentStatus}</span></div>
+          ${o.transactionRef?`<div class="rrow"><span>Transaction Ref</span><span class="mono">${o.transactionRef}</span></div>`:''}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // ================= ADMIN =================
+  function renderAdmin(){
+    if(!APP.adminAuthed){
+      return `<div class="lm-wrap">${header()}<div class="lm-authbox">
+        <h2>Admin Login</h2>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:-8px;">Demo credentials — password: <span class="mono">admin123</span></p>
+        <div class="lm-field"><label>Password</label><input id="admin-pass" type="password"/></div>
+        <button class="lm-btn" style="width:100%;justify-content:center;" id="admin-login-btn">Log In</button>
+      </div>${toastWrap()}</div>`;
+    }
+    const tab = APP.route.atab || 'dashboard';
+    let content;
+    if(tab==='dashboard') content = adminDashboard();
+    else if(tab==='products') content = adminProducts();
+    else if(tab==='categories') content = adminCategories();
+    else if(tab==='orders') content = adminOrders();
+    else if(tab==='coupons') content = adminCoupons();
+    else if(tab==='reviews') content = adminReviews();
+    else if(tab==='customers') content = adminCustomers();
+    return `<div class="lm-adminshell">
+      <div class="lm-asidebar">
+        <div class="lg"><span class="dot" style="background:#fff;width:8px;height:8px;border-radius:50%;display:inline-block;"></span> LUMEN Admin</div>
+        ${[['dashboard','Dashboard'],['products','Products'],['categories','Categories'],['orders','Orders'],['coupons','Coupons'],['reviews','Reviews'],['customers','Customers']].map(([k,l])=>`<a data-admintab="${k}" class="${tab===k?'active':''}">${l}</a>`).join('')}
+        <a data-nav="home" style="margin-top:16px;border-top:1px solid rgba(255,255,255,.15);padding-top:14px;">← Back to Store</a>
+        <a href="#" id="admin-logout">Log Out</a>
+      </div>
+      <div class="lm-amain">${content}${modalHtml()}</div>
+    </div>${toastWrap()}`;
+  }
+
+  function adminDashboard(){
+    const totalSales = APP.orders.filter(o=>o.paymentStatus==='Paid'||o.status==='Delivered').reduce((s,o)=>s+o.total,0);
+    const totalOrders = APP.orders.length;
+    const customers = new Set(APP.orders.map(o=>o.customerEmail)).size;
+    const products = APP.products.length;
+    const pending = APP.orders.filter(o=>o.paymentStatus==='Pending').length;
+    const recent = APP.orders.slice(0,6);
+    const salesByProduct = {};
+    APP.orders.forEach(o=>o.items.forEach(i=>{ salesByProduct[i.name] = (salesByProduct[i.name]||0) + i.qty; }));
+    const best = Object.entries(salesByProduct).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    const maxBest = best.length? best[0][1] : 1;
+    return `
+    <div class="lm-statgrid">
+      <div class="lm-statcard"><div class="lbl">Total Sales</div><div class="val">${money(totalSales)}</div></div>
+      <div class="lm-statcard"><div class="lbl">Total Orders</div><div class="val">${totalOrders}</div></div>
+      <div class="lm-statcard"><div class="lbl">Total Customers</div><div class="val">${customers}</div></div>
+      <div class="lm-statcard"><div class="lbl">Total Products</div><div class="val">${products}</div></div>
+      <div class="lm-statcard"><div class="lbl">Pending Payments</div><div class="val">${pending}</div></div>
+    </div>
+    <div class="lm-panel">
+      <h3>Recent Orders</h3>
+      <table class="lm-table"><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Payment</th><th>Date</th></tr></thead><tbody>
+      ${recent.map(o=>`<tr><td class="mono">${o.orderNumber}</td><td>${escapeHtml(o.customerName)}</td><td>${money(o.total)}</td><td><span class="lm-status-pill ${o.status.toLowerCase()}">${o.status}</span></td><td><span class="lm-status-pill ${o.paymentStatus.toLowerCase()}">${o.paymentStatus}</span></td><td>${fmtDate(o.createdAt)}</td></tr>`).join('') || `<tr><td colspan="6" style="color:var(--muted);">No orders yet.</td></tr>`}
+      </tbody></table>
+    </div>
+    <div class="lm-panel">
+      <h3>Best-Selling Products</h3>
+      ${best.map(([name,qty])=>`<div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span>${escapeHtml(name)}</span><span>${qty} sold</span></div><div class="lm-bar"><div style="width:${(qty/maxBest*100)}%;"></div></div></div>`).join('') || '<p style="color:var(--muted);">No sales yet.</p>'}
+    </div>`;
+  }
+
+  function adminProducts(){
+    return `<div class="lm-panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <h3 style="margin:0;">Products (${APP.products.length})</h3>
+        <button class="lm-btn small" id="new-product">+ Add Product</button>
+      </div>
+      <table class="lm-table"><thead><tr><th></th><th>Name</th><th>SKU</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+      ${APP.products.map(p=>`<tr>
+        <td><img src="${p.images[0]}"/></td>
+        <td>${escapeHtml(p.name)}</td>
+        <td class="mono">${p.sku}</td>
+        <td>${escapeHtml(catName(p.category))}</td>
+        <td>${money(finalPrice(p))}${p.discount?` <span style="color:var(--muted);text-decoration:line-through;">${money(p.price)}</span>`:''}</td>
+        <td>${p.stock}</td>
+        <td><span class="lm-status-pill ${p.status}">${p.status}</span></td>
+        <td class="actions"><button class="lm-iconbtn" data-editproduct="${p.id}">Edit</button><button class="lm-iconbtn" data-delproduct="${p.id}">Delete</button></td>
+      </tr>`).join('') || `<tr><td colspan="8" style="color:var(--muted);">No products.</td></tr>`}
+      </tbody></table>
+    </div>`;
+  }
+
+  function adminCategories(){
+    return `<div class="lm-panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <h3 style="margin:0;">Categories</h3>
+        <button class="lm-btn small" id="new-category">+ Add Category</button>
+      </div>
+      <table class="lm-table"><thead><tr><th>Name</th><th>Products</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+      ${APP.categories.map(c=>`<tr>
+        <td>${c.icon||'📦'} ${escapeHtml(c.name)}</td>
+        <td>${APP.products.filter(p=>p.category===c.id).length}</td>
+        <td><span class="lm-status-pill ${c.enabled?'active':'inactive'}">${c.enabled?'Enabled':'Disabled'}</span></td>
+        <td class="actions"><button class="lm-iconbtn" data-editcat="${c.id}">Edit</button><button class="lm-iconbtn" data-togglecat="${c.id}">${c.enabled?'Disable':'Enable'}</button><button class="lm-iconbtn" data-delcat="${c.id}">Delete</button></td>
+      </tr>`).join('')}
+      </tbody></table>
+    </div>`;
+  }
+
+  function adminOrders(){
+    const f = APP.route.orderFilter || {status:'', q:''};
+    APP.route.orderFilter = f;
+    let list = APP.orders;
+    if(f.status) list = list.filter(o=>o.status===f.status);
+    if(f.q) list = list.filter(o=>o.orderNumber.toLowerCase().includes(f.q.toLowerCase()) || o.customerName.toLowerCase().includes(f.q.toLowerCase()));
+    return `<div class="lm-panel">
+      <div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+        <h3 style="margin:0;">Orders (${list.length})</h3>
+        <div style="display:flex;gap:8px;">
+          <input class="lm-select" id="order-search" placeholder="Search order # or customer" value="${escapeHtml(f.q)}"/>
+          <select class="lm-select" id="order-status-filter">
+            <option value="">All statuses</option>
+            ${['New','Processing','Shipped','Delivered','Cancelled'].map(s=>`<option value="${s}" ${f.status===s?'selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <table class="lm-table"><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Payment</th><th>Date</th><th>Actions</th></tr></thead><tbody>
+      ${list.map(o=>`<tr>
+        <td class="mono">${o.orderNumber}</td>
+        <td>${escapeHtml(o.customerName)}</td>
+        <td>${o.items.length}</td>
+        <td>${money(o.total)}</td>
+        <td><span class="lm-status-pill ${o.status.toLowerCase()}">${o.status}</span></td>
+        <td><span class="lm-status-pill ${o.paymentStatus.toLowerCase()}">${o.paymentStatus}</span></td>
+        <td>${fmtDate(o.createdAt)}</td>
+        <td class="actions"><button class="lm-iconbtn" data-vieworder="${o.id}">View</button></td>
+      </tr>`).join('') || `<tr><td colspan="8" style="color:var(--muted);">No orders match.</td></tr>`}
+      </tbody></table>
+    </div>`;
+  }
+
+  function adminCoupons(){
+    return `<div class="lm-panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <h3 style="margin:0;">Coupons</h3><button class="lm-btn small" id="new-coupon">+ Add Coupon</button>
+      </div>
+      <table class="lm-table"><thead><tr><th>Code</th><th>Type</th><th>Value</th><th>Min Order</th><th>Expiry</th><th>Used</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+      ${APP.coupons.map(c=>`<tr>
+        <td class="mono">${c.code}</td><td>${c.type}</td><td>${c.type==='percent'?c.value+'%':money(c.value)}</td><td>${money(c.minOrder)}</td><td>${c.expiry}</td><td>${c.used}/${c.usageLimit}</td>
+        <td><span class="lm-status-pill ${c.active?'active':'inactive'}">${c.active?'Active':'Inactive'}</span></td>
+        <td class="actions"><button class="lm-iconbtn" data-editcoupon="${c.code}">Edit</button><button class="lm-iconbtn" data-delcoupon="${c.code}">Delete</button></td>
+      </tr>`).join('') || `<tr><td colspan="8" style="color:var(--muted);">No coupons.</td></tr>`}
+      </tbody></table>
+    </div>`;
+  }
+
+  function adminReviews(){
+    return `<div class="lm-panel">
+      <h3>Reviews</h3>
+      <table class="lm-table"><thead><tr><th>Product</th><th>Customer</th><th>Rating</th><th>Text</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+      ${APP.reviews.map(r=>`<tr>
+        <td>${escapeHtml(product(r.productId)?.name||r.productId)}</td>
+        <td>${escapeHtml(r.name)}</td><td>${stars(r.rating)}</td>
+        <td style="max-width:220px;">${escapeHtml(r.text)}</td>
+        <td><span class="lm-status-pill ${r.approved?'active':'pending'}">${r.approved?'Approved':'Pending'}</span></td>
+        <td class="actions">${!r.approved?`<button class="lm-iconbtn" data-approverv="${r.id}">Approve</button>`:''}<button class="lm-iconbtn" data-delrv="${r.id}">Delete</button></td>
+      </tr>`).join('') || `<tr><td colspan="6" style="color:var(--muted);">No reviews.</td></tr>`}
+      </tbody></table>
+    </div>`;
+  }
+
+  function adminCustomers(){
+    const map = {};
+    APP.orders.forEach(o=>{
+      if(!map[o.customerEmail]) map[o.customerEmail] = {name:o.customerName, email:o.customerEmail, orders:0, spent:0};
+      map[o.customerEmail].orders++; map[o.customerEmail].spent += o.total;
+    });
+    const list = Object.values(map).sort((a,b)=>b.spent-a.spent);
+    return `<div class="lm-panel"><h3>Customers (${list.length})</h3>
+      <table class="lm-table"><thead><tr><th>Name</th><th>Email</th><th>Orders</th><th>Total Spent</th></tr></thead><tbody>
+      ${list.map(c=>`<tr><td>${escapeHtml(c.name)}</td><td>${escapeHtml(c.email)}</td><td>${c.orders}</td><td>${money(c.spent)}</td></tr>`).join('') || `<tr><td colspan="4" style="color:var(--muted);">No customers yet.</td></tr>`}
+      </tbody></table>
+    </div>`;
+  }
+
+  // ---------------- Admin modals ----------------
+  let modal = null; // {type, data}
+  function modalHtml(){
+    if(!modal) return '';
+    if(modal.type==='product') return productModal(modal.data);
+    if(modal.type==='category') return categoryModal(modal.data);
+    if(modal.type==='coupon') return couponModal(modal.data);
+    if(modal.type==='order') return orderModal(modal.data);
+    return '';
+  }
+  function productModal(p){
+    const isNew = !p;
+    p = p || {id:null, name:'', category:APP.categories[0]?.id||'', price:0, discount:0, stock:0, sku:'', description:'', status:'active', images:['https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600'], variants:{colors:[],sizes:[]}};
+    return `<div class="lm-modal-bg" id="modal-bg"><div class="lm-modal lm-modalpos">
+      <button class="close lm-iconbtn" id="modal-close">✕</button>
+      <h3>${isNew?'Add Product':'Edit Product'}</h3>
+      <div class="lm-field"><label>Name</label><input id="m-name" value="${escapeHtml(p.name)}"/></div>
+      <div class="lm-field"><label>Description</label><textarea id="m-desc" rows="3">${escapeHtml(p.description)}</textarea></div>
+      <div style="display:flex;gap:10px;">
+        <div class="lm-field" style="flex:1;"><label>Price</label><input id="m-price" type="number" value="${p.price}"/></div>
+        <div class="lm-field" style="flex:1;"><label>Discount %</label><input id="m-discount" type="number" value="${p.discount}"/></div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <div class="lm-field" style="flex:1;"><label>Category</label><select id="m-cat">${APP.categories.map(c=>`<option value="${c.id}" ${p.category===c.id?'selected':''}>${escapeHtml(c.name)}</option>`).join('')}</select></div>
+        <div class="lm-field" style="flex:1;"><label>SKU</label><input id="m-sku" value="${escapeHtml(p.sku)}"/></div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <div class="lm-field" style="flex:1;"><label>Stock</label><input id="m-stock" type="number" value="${p.stock}"/></div>
+        <div class="lm-field" style="flex:1;"><label>Status</label><select id="m-status"><option value="active" ${p.status==='active'?'selected':''}>Active</option><option value="inactive" ${p.status==='inactive'?'selected':''}>Inactive</option></select></div>
+      </div>
+      <div class="lm-field"><label>Image URL</label><input id="m-image" value="${escapeHtml(p.images[0])}"/></div>
+      <div style="display:flex;gap:10px;">
+        <div class="lm-field" style="flex:1;"><label>Colors (comma separated)</label><input id="m-colors" value="${escapeHtml((p.variants.colors||[]).join(', '))}"/></div>
+        <div class="lm-field" style="flex:1;"><label>Sizes (comma separated)</label><input id="m-sizes" value="${escapeHtml((p.variants.sizes||[]).join(', '))}"/></div>
+      </div>
+      <button class="lm-btn" id="m-save" data-id="${p.id||''}" style="width:100%;justify-content:center;">${isNew?'Create Product':'Save Changes'}</button>
+    </div></div>`;
+  }
+  function categoryModal(c){
+    const isNew = !c; c = c || {id:null, name:'', icon:'📦', image:'', enabled:true};
+    return `<div class="lm-modal-bg" id="modal-bg"><div class="lm-modal lm-modalpos">
+      <button class="close lm-iconbtn" id="modal-close">✕</button>
+      <h3>${isNew?'Add Category':'Edit Category'}</h3>
+      <div class="lm-field"><label>Name</label><input id="mc-name" value="${escapeHtml(c.name)}"/></div>
+      <div class="lm-field"><label>Icon (emoji)</label><input id="mc-icon" value="${escapeHtml(c.icon||'')}"/></div>
+      <div class="lm-field"><label>Image URL (optional)</label><input id="mc-image" value="${escapeHtml(c.image||'')}"/></div>
+      <button class="lm-btn" id="mc-save" data-id="${c.id||''}" style="width:100%;justify-content:center;">${isNew?'Create Category':'Save Changes'}</button>
+    </div></div>`;
+  }
+  function couponModal(c){
+    const isNew = !c; c = c || {code:'', type:'percent', value:10, minOrder:0, maxDiscount:50, expiry:'2027-12-31', usageLimit:100, used:0, active:true};
+    return `<div class="lm-modal-bg" id="modal-bg"><div class="lm-modal lm-modalpos">
+      <button class="close lm-iconbtn" id="modal-close">✕</button>
+      <h3>${isNew?'Add Coupon':'Edit Coupon'}</h3>
+      <div class="lm-field"><label>Code</label><input id="mp-code" value="${escapeHtml(c.code)}" ${isNew?'':'disabled'}/></div>
+      <div style="display:flex;gap:10px;">
+        <div class="lm-field" style="flex:1;"><label>Type</label><select id="mp-type"><option value="percent" ${c.type==='percent'?'selected':''}>Percentage</option><option value="fixed" ${c.type==='fixed'?'selected':''}>Fixed</option></select></div>
+        <div class="lm-field" style="flex:1;"><label>Value</label><input id="mp-value" type="number" value="${c.value}"/></div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <div class="lm-field" style="flex:1;"><label>Min Order</label><input id="mp-min" type="number" value="${c.minOrder}"/></div>
+        <div class="lm-field" style="flex:1;"><label>Max Discount</label><input id="mp-max" type="number" value="${c.maxDiscount}"/></div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <div class="lm-field" style="flex:1;"><label>Expiry</label><input id="mp-expiry" type="date" value="${c.expiry}"/></div>
+        <div class="lm-field" style="flex:1;"><label>Usage Limit</label><input id="mp-limit" type="number" value="${c.usageLimit}"/></div>
+      </div>
+      <button class="lm-btn" id="mp-save" data-code="${isNew?'':c.code}" style="width:100%;justify-content:center;">${isNew?'Create Coupon':'Save Changes'}</button>
+    </div></div>`;
+  }
+  function orderModal(o){
+    return `<div class="lm-modal-bg" id="modal-bg"><div class="lm-modal lm-modalpos" style="max-width:640px;">
+      <button class="close lm-iconbtn" id="modal-close">✕</button>
+      <h3>Order ${o.orderNumber}</h3>
+      <p style="font-size:13px;color:var(--muted);">${escapeHtml(o.customerName)} · ${escapeHtml(o.customerEmail)} · ${escapeHtml(o.customerPhone||'')}</p>
+      <p style="font-size:13px;color:var(--muted);">${escapeHtml(o.address.line1)}, ${escapeHtml(o.address.city)}, ${escapeHtml(o.address.state)} ${escapeHtml(o.address.zip)}, ${escapeHtml(o.address.country)}</p>
+      <table class="lm-table"><thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead><tbody>
+      ${o.items.map(i=>`<tr><td>${escapeHtml(i.name)}</td><td>${i.qty}</td><td>${money(i.price)}</td></tr>`).join('')}
+      </tbody></table>
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <div class="lm-field" style="flex:1;"><label>Order Status</label>
+          <select id="mo-status">${['New','Processing','Shipped','Delivered','Cancelled'].map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${s}</option>`).join('')}</select>
+        </div>
+        <div class="lm-field" style="flex:1;"><label>Payment Status</label>
+          <select id="mo-paystatus">${['Pending','Paid','Failed','Refunded'].map(s=>`<option value="${s}" ${o.paymentStatus===s?'selected':''}>${s}</option>`).join('')}</select>
+        </div>
+      </div>
+      <button class="lm-btn" id="mo-save" data-id="${o.id}" style="width:100%;justify-content:center;">Update Order</button>
+      <button class="lm-btn outline" data-nav="invoice" data-id="${o.id}" style="width:100%;justify-content:center;margin-top:8px;">View / Print Invoice</button>
+    </div></div>`;
+  }
+
+  function confirmDialog(msg, onYes){
+    const bg = document.createElement('div');
+    bg.className = 'lm-modal-bg';
+    bg.innerHTML = `<div class="lm-modal" style="max-width:380px;text-align:center;"><p style="font-size:14.5px;">${escapeHtml(msg)}</p>
+      <div style="display:flex;gap:10px;margin-top:16px;"><button class="lm-btn outline" id="cf-no" style="flex:1;justify-content:center;">Cancel</button><button class="lm-btn danger" id="cf-yes" style="flex:1;justify-content:center;">Confirm</button></div></div>`;
+    document.body.appendChild(bg);
+    bg.querySelector('#cf-no').onclick = ()=>bg.remove();
+    bg.querySelector('#cf-yes').onclick = ()=>{ bg.remove(); onYes(); };
+  }
+
+  // ================= EVENT BINDING =================
+  function bindEvents(){
+    const root = document.getElementById('lumen-root');
+
+    root.querySelectorAll('[data-nav]').forEach(el=>el.addEventListener('click', e=>{
+      e.preventDefault();
+      const page = el.getAttribute('data-nav');
+      const params = {};
+      if(el.dataset.cat) params.cat = el.dataset.cat, params.filters = null;
+      if(el.dataset.id) params.id = el.dataset.id;
+      if(el.dataset.tab) params.tab = el.dataset.tab;
+      if(page==='shop'){ APP.route.q=''; if(el.dataset.cat){ nav('shop',{cat:el.dataset.cat}); return;} }
+      nav(page, params);
+    }));
+
+    root.querySelectorAll('[data-wish]').forEach(el=>el.addEventListener('click', e=>{ e.stopPropagation(); toggleWishlist(el.getAttribute('data-wish')); }));
+    root.querySelectorAll('[data-addcart]').forEach(el=>el.addEventListener('click', e=>{ e.stopPropagation(); addToCart(el.getAttribute('data-addcart'),1,{}); }));
+    root.querySelectorAll('[data-buynow]').forEach(el=>el.addEventListener('click', e=>{ e.stopPropagation(); addToCart(el.getAttribute('data-buynow'),1,{}); if(!requireLogin()){return;} resetCheckout(); nav('checkout'); }));
+
+    const searchInput = document.getElementById('lm-search-input');
+    if(searchInput){
+      searchInput.addEventListener('keydown', e=>{ if(e.key==='Enter'){ nav('shop', {q:searchInput.value, cat:'', filters:null}); } });
+    }
+
+    // Shop filters
+    const sortSel = document.getElementById('lm-sort');
+    if(sortSel) sortSel.addEventListener('change', ()=>{ APP.route.filters.sort = sortSel.value; render(); });
+    root.querySelectorAll('[name="fcat"]').forEach(r=>r.addEventListener('change', ()=>{ APP.route.filters.cat = r.value; render(); }));
+    root.querySelectorAll('[name="frating"]').forEach(r=>r.addEventListener('change', ()=>{ APP.route.filters.rating = r.value; render(); }));
+    const fmin = document.getElementById('fmin'), fmax = document.getElementById('fmax');
+    if(fmin) fmin.addEventListener('change', ()=>{ APP.route.filters.min = fmin.value; render(); });
+    if(fmax) fmax.addEventListener('change', ()=>{ APP.route.filters.max = fmax.value; render(); });
+
+    // Product detail
+    root.querySelectorAll('[data-thumb]').forEach(el=>el.addEventListener('click', ()=>{ APP.route.pstate.img = +el.dataset.thumb; render(); }));
+    root.querySelectorAll('[data-setcolor]').forEach(el=>el.addEventListener('click', ()=>{ APP.route.pstate.color = el.dataset.setcolor; render(); }));
+    root.querySelectorAll('[data-setsize]').forEach(el=>el.addEventListener('click', ()=>{ APP.route.pstate.size = el.dataset.setsize; render(); }));
+    root.querySelectorAll('[data-qty]').forEach(el=>el.addEventListener('click', ()=>{ APP.route.pstate.qty = Math.max(1, APP.route.pstate.qty + (+el.dataset.qty)); render(); }));
+    root.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click', ()=>{ APP.route.pstate.tab = el.dataset.tab; render(); }));
+    const addDetail = document.querySelector('[data-addcart-detail]');
+    if(addDetail) addDetail.addEventListener('click', ()=>{
+      const p = product(APP.route.id), st = APP.route.pstate;
+      addToCart(p.id, st.qty, {color:st.color, size:st.size});
+    });
+    const buyDetail = document.querySelector('[data-buynow-detail]');
+    if(buyDetail) buyDetail.addEventListener('click', ()=>{
+      const p = product(APP.route.id), st = APP.route.pstate;
+      addToCart(p.id, st.qty, {color:st.color, size:st.size});
+      if(!requireLogin()) return;
+      resetCheckout(); nav('checkout');
+    });
+    const rvSubmit = document.getElementById('rv-submit');
+    if(rvSubmit) rvSubmit.addEventListener('click', ()=>{
+      if(!requireLogin()) return;
+      const rating = +document.getElementById('rv-rating').value;
+      const text = document.getElementById('rv-text').value.trim();
+      if(!text){ toast('Please write a short review','error'); return; }
+      APP.reviews.push({id:uid('rv_'), productId:rvSubmit.dataset.pid, name:APP.profile.name, rating, text, approved:false, date:Date.now()});
+      persistReviews();
+      toast('Review submitted — pending admin approval','success');
+      render();
+    });
+
+    // Cart
+    root.querySelectorAll('[data-cartqty]').forEach(el=>el.addEventListener('click', ()=>{
+      const cid = el.dataset.cid, variant = JSON.parse(el.dataset.cvar);
+      const it = APP.cart.find(i=>i.productId===cid && variantKey(i.variant)===variantKey(variant));
+      if(it) setCartQty(cid, variant, it.qty + (+el.dataset.cartqty));
+    }));
+    root.querySelectorAll('[data-cartremove]').forEach(el=>el.addEventListener('click', ()=>{
+      removeFromCart(el.dataset.cartremove, JSON.parse(el.dataset.cvar));
+    }));
+    const applyCouponBtn = document.getElementById('apply-coupon');
+    if(applyCouponBtn) applyCouponBtn.addEventListener('click', ()=>applyCoupon(document.getElementById('coupon-input').value));
+    const goCheckout = document.getElementById('go-checkout');
+    if(goCheckout) goCheckout.addEventListener('click', ()=>{ if(!requireLogin()) return; resetCheckout(); nav('checkout'); });
+
+    // Auth
+    const doLogin = document.getElementById('do-login');
+    if(doLogin) doLogin.addEventListener('click', ()=>login(document.getElementById('lg-email').value.trim(), document.getElementById('lg-pass').value));
+    const forgot = document.getElementById('forgot-pass');
+    if(forgot) forgot.addEventListener('click', e=>{ e.preventDefault(); toast('Password reset link sent to your email (demo)','success'); });
+    const doSignup = document.getElementById('do-signup');
+    if(doSignup) doSignup.addEventListener('click', ()=>{
+      const name=document.getElementById('su-name').value.trim(), email=document.getElementById('su-email').value.trim(),
+            phone=document.getElementById('su-phone').value.trim(), password=document.getElementById('su-pass').value;
+      if(!name||!email||password.length<6){ toast('Please fill all fields — password min 6 characters','error'); return; }
+      signup({name,email,phone,password});
+    });
+
+    // Account
+    const saveProfile = document.getElementById('save-profile');
+    if(saveProfile) saveProfile.addEventListener('click', ()=>{
+      APP.profile.name = document.getElementById('pf-name').value.trim();
+      APP.profile.phone = document.getElementById('pf-phone').value.trim();
+      persistProfile(); toast('Profile updated','success'); render();
+    });
+    const savePass = document.getElementById('save-pass');
+    if(savePass) savePass.addEventListener('click', ()=>{
+      const np = document.getElementById('pf-newpass').value;
+      if(np.length<6){ toast('Password must be at least 6 characters','error'); return; }
+      APP.profile.password = np;
+      const u = APP.users.find(u=>u.email===APP.profile.email); if(u){u.password=np; persistUsers();}
+      persistProfile(); toast('Password updated','success'); render();
+    });
+    const addAddr = document.getElementById('add-address');
+    if(addAddr) addAddr.addEventListener('click', ()=>{
+      const a = {line1:document.getElementById('ad-line1').value.trim(), city:document.getElementById('ad-city').value.trim(), state:document.getElementById('ad-state').value.trim(), zip:document.getElementById('ad-zip').value.trim(), country:document.getElementById('ad-country').value.trim()};
+      if(!a.line1||!a.city){ toast('Please fill in the address','error'); return; }
+      APP.profile.addresses = [...(APP.profile.addresses||[]), a]; persistProfile(); toast('Address added','success'); render();
+    });
+    root.querySelectorAll('[data-deladdr]').forEach(el=>el.addEventListener('click', ()=>{
+      APP.profile.addresses.splice(+el.dataset.deladdr,1); persistProfile(); render();
+    }));
+    root.querySelectorAll('[data-cancelorder]').forEach(el=>el.addEventListener('click', ()=>{
+      confirmDialog('Cancel this order?', ()=>{
+        const o = APP.orders.find(x=>x.id===el.dataset.cancelorder);
+        o.status='Cancelled'; if(o.paymentStatus==='Paid') o.paymentStatus='Refunded';
+        persistOrders(); toast('Order cancelled','success'); render();
+      });
+    }));
+    const doLogout = document.getElementById('do-logout');
+    if(doLogout) doLogout.addEventListener('click', e=>{ e.preventDefault(); logout(); });
+
+    // Checkout
+    const coNext = document.getElementById('co-next');
+    if(coNext) coNext.addEventListener('click', ()=>{
+      if(checkout.step===1){
+        checkout.info = {name:val('co-name'), email:val('co-email'), phone:val('co-phone')};
+        if(!checkout.info.name || !checkout.info.email){ toast('Please complete your information','error'); return; }
+      } else if(checkout.step===2){
+        checkout.address = {line1:val('co-line1'), city:val('co-city'), state:val('co-state'), zip:val('co-zip'), country:val('co-country')};
+        if(!checkout.address.line1 || !checkout.address.city){ toast('Please complete your shipping address','error'); return; }
+      }
+      checkout.step++; render();
+    });
+    const coBack = document.getElementById('co-back');
+    if(coBack) coBack.addEventListener('click', ()=>{ checkout.step--; render(); });
+    root.querySelectorAll('[data-delivery]').forEach(el=>el.addEventListener('click', ()=>{ checkout.delivery = el.dataset.delivery; render(); }));
+    root.querySelectorAll('[data-payment]').forEach(el=>el.addEventListener('click', ()=>{ checkout.payment = el.dataset.payment; render(); }));
+    const coPlace = document.getElementById('co-place');
+    if(coPlace) coPlace.addEventListener('click', ()=>{
+      if(checkout.payment==='card'){
+        checkout.card = {number:val('cc-num'), name:val('cc-name'), exp:val('cc-exp'), cvv:val('cc-cvv')};
+        if(!checkout.card.number || !checkout.card.name || !checkout.card.exp || !checkout.card.cvv){ toast('Please complete card details','error'); return; }
+      }
+      placeOrder();
+    });
+
+    // Invoice print/download
+    const printInv = document.getElementById('print-invoice');
+    if(printInv) printInv.addEventListener('click', ()=>window.print());
+    const dlInv = document.getElementById('download-invoice');
+    if(dlInv) dlInv.addEventListener('click', ()=>{ toast('Opening print dialog — choose "Save as PDF" to download','success'); window.print(); });
+
+    // Admin login/logout
+    const adminLoginBtn = document.getElementById('admin-login-btn');
+    if(adminLoginBtn) adminLoginBtn.addEventListener('click', ()=>{
+      if(document.getElementById('admin-pass').value === LS_ADMIN_PASS){ APP.adminAuthed = true; nav('admin', {atab:'dashboard'}); toast('Welcome, Admin','success'); }
+      else toast('Incorrect password','error');
+    });
+    const adminLogout = document.getElementById('admin-logout');
+    if(adminLogout) adminLogout.addEventListener('click', e=>{ e.preventDefault(); APP.adminAuthed=false; nav('home'); });
+    root.querySelectorAll('[data-admintab]').forEach(el=>el.addEventListener('click', ()=>{ modal=null; nav('admin', {atab:el.dataset.admintab}); }));
+
+    // Modal close
+    const modalBg = document.getElementById('modal-bg');
+    if(modalBg) modalBg.addEventListener('click', e=>{ if(e.target.id==='modal-bg'){ modal=null; render(); } });
+    const modalClose = document.getElementById('modal-close');
+    if(modalClose) modalClose.addEventListener('click', ()=>{ modal=null; render(); });
+
+    // Admin products
+    const newProduct = document.getElementById('new-product');
+    if(newProduct) newProduct.addEventListener('click', ()=>{ modal={type:'product', data:null}; render(); });
+    root.querySelectorAll('[data-editproduct]').forEach(el=>el.addEventListener('click', ()=>{ modal={type:'product', data:product(el.dataset.editproduct)}; render(); }));
+    root.querySelectorAll('[data-delproduct]').forEach(el=>el.addEventListener('click', ()=>{
+      confirmDialog('Delete this product? This cannot be undone.', ()=>{
+        APP.products = APP.products.filter(p=>p.id!==el.dataset.delproduct); persistProducts(); toast('Product deleted','success'); render();
+      });
+    }));
+    const mSave = document.getElementById('m-save');
+    if(mSave) mSave.addEventListener('click', ()=>{
+      const name=val('m-name'); if(!name){ toast('Product name is required','error'); return; }
+      const data = {
+        name, description:val('m-desc'), price:+val('m-price')||0, discount:+val('m-discount')||0,
+        category:val('m-cat'), sku:val('m-sku')||('SKU-'+uid()), stock:+val('m-stock')||0, status:val('m-status'),
+        images:[val('m-image')||'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600'],
+        variants:{colors:val('m-colors').split(',').map(s=>s.trim()).filter(Boolean), sizes:val('m-sizes').split(',').map(s=>s.trim()).filter(Boolean)},
+      };
+      const id = mSave.dataset.id;
+      if(id){ Object.assign(product(id), data); toast('Product updated','success'); }
+      else { APP.products.unshift({id:uid('p_'), rating:0, reviewCount:0, tag:'', createdAt:Date.now(), ...data}); toast('Product created','success'); }
+      persistProducts(); modal=null; render();
+    });
+
+    // Admin categories
+    const newCat = document.getElementById('new-category');
+    if(newCat) newCat.addEventListener('click', ()=>{ modal={type:'category', data:null}; render(); });
+    root.querySelectorAll('[data-editcat]').forEach(el=>el.addEventListener('click', ()=>{ modal={type:'category', data:category(el.dataset.editcat)}; render(); }));
+    root.querySelectorAll('[data-togglecat]').forEach(el=>el.addEventListener('click', ()=>{ const c=category(el.dataset.togglecat); c.enabled=!c.enabled; persistCategories(); render(); }));
+    root.querySelectorAll('[data-delcat]').forEach(el=>el.addEventListener('click', ()=>{
+      confirmDialog('Delete this category?', ()=>{ APP.categories = APP.categories.filter(c=>c.id!==el.dataset.delcat); persistCategories(); toast('Category deleted','success'); render(); });
+    }));
+    const mcSave = document.getElementById('mc-save');
+    if(mcSave) mcSave.addEventListener('click', ()=>{
+      const name = val('mc-name'); if(!name){ toast('Category name required','error'); return; }
+      const id = mcSave.dataset.id;
+      if(id){ const c=category(id); c.name=name; c.icon=val('mc-icon'); c.image=val('mc-image'); toast('Category updated','success'); }
+      else { APP.categories.push({id:uid('cat_'), name, icon:val('mc-icon')||'📦', image:val('mc-image'), enabled:true}); toast('Category created','success'); }
+      persistCategories(); modal=null; render();
+    });
+
+    // Admin orders
+    const orderSearch = document.getElementById('order-search');
+    if(orderSearch) orderSearch.addEventListener('input', ()=>{ APP.route.orderFilter.q = orderSearch.value; render(); });
+    const orderStatusFilter = document.getElementById('order-status-filter');
+    if(orderStatusFilter) orderStatusFilter.addEventListener('change', ()=>{ APP.route.orderFilter.status = orderStatusFilter.value; render(); });
+    root.querySelectorAll('[data-vieworder]').forEach(el=>el.addEventListener('click', ()=>{ modal={type:'order', data:APP.orders.find(o=>o.id===el.dataset.vieworder)}; render(); }));
+    const moSave = document.getElementById('mo-save');
+    if(moSave) moSave.addEventListener('click', ()=>{
+      const o = APP.orders.find(x=>x.id===moSave.dataset.id);
+      o.status = val('mo-status'); o.paymentStatus = val('mo-paystatus');
+      persistOrders(); toast('Order updated','success'); modal=null; render();
+    });
+
+    // Admin coupons
+    const newCoupon = document.getElementById('new-coupon');
+    if(newCoupon) newCoupon.addEventListener('click', ()=>{ modal={type:'coupon', data:null}; render(); });
+    root.querySelectorAll('[data-editcoupon]').forEach(el=>el.addEventListener('click', ()=>{ modal={type:'coupon', data:APP.coupons.find(c=>c.code===el.dataset.editcoupon)}; render(); }));
+    root.querySelectorAll('[data-delcoupon]').forEach(el=>el.addEventListener('click', ()=>{
+      confirmDialog('Delete this coupon?', ()=>{ APP.coupons = APP.coupons.filter(c=>c.code!==el.dataset.delcoupon); persistCoupons(); toast('Coupon deleted','success'); render(); });
+    }));
+    const mpSave = document.getElementById('mp-save');
+    if(mpSave) mpSave.addEventListener('click', ()=>{
+      const code = val('mp-code').toUpperCase().trim(); if(!code){ toast('Coupon code required','error'); return; }
+      const data = {type:val('mp-type'), value:+val('mp-value')||0, minOrder:+val('mp-min')||0, maxDiscount:+val('mp-max')||0, expiry:val('mp-expiry'), usageLimit:+val('mp-limit')||0};
+      const existingCode = mpSave.dataset.code;
+      if(existingCode){ Object.assign(APP.coupons.find(c=>c.code===existingCode), data); toast('Coupon updated','success'); }
+      else {
+        if(APP.coupons.some(c=>c.code===code)){ toast('Coupon code already exists','error'); return; }
+        APP.coupons.push({code, used:0, active:true, ...data}); toast('Coupon created','success');
+      }
+      persistCoupons(); modal=null; render();
+    });
+
+    // Admin reviews
+    root.querySelectorAll('[data-approverv]').forEach(el=>el.addEventListener('click', ()=>{
+      const r = APP.reviews.find(x=>x.id===el.dataset.approverv); r.approved=true; persistReviews(); toast('Review approved','success'); render();
+    }));
+    root.querySelectorAll('[data-delrv]').forEach(el=>el.addEventListener('click', ()=>{
+      confirmDialog('Delete this review?', ()=>{ APP.reviews = APP.reviews.filter(x=>x.id!==el.dataset.delrv); persistReviews(); toast('Review deleted','success'); render(); });
+    }));
+  }
+  function val(id){ const el = document.getElementById(id); return el? el.value : ''; }
+
+  loadAll().then(render);
+})();
+</script>
