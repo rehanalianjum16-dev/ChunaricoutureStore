@@ -1,8 +1,8 @@
 <style>
   :root{
-    --navy:#0B2A6B; --blue:#2F6FED; --blue-light:#EAF0FE; --ink:#12203D; --muted:#5B6B85;
-    --line:#E1E7F2; --surface:#F5F7FB; --white:#FFFFFF; --success:#1F9D67; --warn:#E8A33D; --danger:#D64545;
-    --gold:#C99A3B;
+    --navy:#5C1030; --blue:#B4832E; --blue-light:#F7EEE0; --ink:#2B1620; --muted:#8A7178;
+    --line:#ECE1DD; --surface:#FBF6F1; --white:#FFFFFF; --success:#1F9D67; --warn:#E8A33D; --danger:#D64545;
+    --gold:#B4832E;
     --radius:10px;
   }
   *{box-sizing:border-box;}
@@ -16,7 +16,7 @@
   /* ---- Header ---- */
   .lm-header{position:sticky; top:0; z-index:40; background:var(--white); border-bottom:1px solid var(--line);}
   .lm-headtop{display:flex; align-items:center; gap:16px; padding:14px 20px; max-width:1200px; margin:0 auto;}
-  .lm-logo{font-size:22px; font-weight:700; color:var(--navy); display:flex; align-items:center; gap:6px; cursor:pointer; white-space:nowrap;}
+  .lm-logo{font-size:19px; font-weight:700; color:var(--navy); display:flex; align-items:center; gap:6px; cursor:pointer; white-space:nowrap;}
   .lm-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);display:inline-block;}
   .lm-search{flex:1; display:flex; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:8px 14px; gap:8px; max-width:520px;}
   .lm-search input{border:none; background:none; outline:none; flex:1; font-size:14px; color:var(--ink);}
@@ -30,13 +30,13 @@
   .lm-wrap{max-width:1200px; margin:0 auto; padding:24px 20px 80px;}
 
   /* ---- Hero ---- */
-  .lm-hero{background:linear-gradient(135deg,var(--navy),#153a8f); border-radius:16px; color:#fff; padding:52px 44px; display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:36px; overflow:hidden; position:relative;}
+  .lm-hero{background:linear-gradient(135deg,var(--navy),#8A2145); border-radius:16px; color:#fff; padding:52px 44px; display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:36px; overflow:hidden; position:relative;}
   .lm-hero::after{content:"";position:absolute; right:-60px; top:-60px; width:260px; height:260px; border:1px solid rgba(255,255,255,.15); border-radius:50%;}
-  .lm-hero .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#9FB6F5; margin-bottom:10px;}
+  .lm-hero .eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#E8C9A0; margin-bottom:10px;}
   .lm-hero h1{font-size:38px; max-width:480px; margin:0 0 12px;}
-  .lm-hero p{color:#C7D5F7; max-width:420px; margin:0 0 20px; font-size:14.5px;}
+  .lm-hero p{color:#EBD3C4; max-width:420px; margin:0 0 20px; font-size:14.5px;}
   .lm-btn{display:inline-flex; align-items:center; gap:8px; background:var(--blue); color:#fff; border:none; padding:11px 22px; border-radius:999px; font-weight:600; font-size:14px;}
-  .lm-btn:hover{background:#255ed1;}
+  .lm-btn:hover{background:#96702A;}
   .lm-btn.ghost{background:transparent; border:1px solid rgba(255,255,255,.5); color:#fff;}
   .lm-btn.outline{background:#fff; color:var(--navy); border:1px solid var(--line);}
   .lm-btn.small{padding:7px 14px; font-size:13px;}
@@ -196,7 +196,7 @@
   .lm-adminshell{display:grid; grid-template-columns:220px 1fr; min-height:calc(100vh - 60px);}
   .lm-asidebar{background:var(--navy); color:#fff; padding:22px 14px;}
   .lm-asidebar .lg{font-size:19px; font-weight:700; padding:0 10px 22px; display:flex; align-items:center; gap:6px;}
-  .lm-asidebar a{display:block; padding:10px 12px; border-radius:8px; font-size:13.5px; color:#C7D5F7; margin-bottom:2px; font-weight:600;}
+  .lm-asidebar a{display:block; padding:10px 12px; border-radius:8px; font-size:13.5px; color:#EBD3C4; margin-bottom:2px; font-weight:600;}
   .lm-asidebar a.active, .lm-asidebar a:hover{background:rgba(255,255,255,.12); color:#fff;}
   .lm-amain{padding:26px 30px; background:var(--surface); min-height:100%;}
   .lm-statgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:16px; margin-bottom:26px;}
@@ -228,6 +228,62 @@
   .lm-loading{display:flex; align-items:center; justify-content:center; padding:100px 0; color:var(--muted); font-size:14px;}
   .lm-spin{width:30px;height:30px;border:3px solid var(--line); border-top-color:var(--blue); border-radius:50%; animation:lmspin .7s linear infinite; margin-right:10px;}
   @keyframes lmspin{to{transform:rotate(360deg);}}
+
+  /* ---- Promo banners ---- */
+  .lm-promo{border-radius:16px; overflow:hidden; position:relative; margin:40px 0; min-height:220px; display:flex; align-items:center; background-size:cover; background-position:center; color:#fff;}
+  .lm-promo::before{content:"";position:absolute; inset:0; background:linear-gradient(90deg, rgba(43,22,32,.82), rgba(43,22,32,.25));}
+  .lm-promo .inner{position:relative; padding:38px 44px; max-width:460px;}
+  .lm-promo .eyebrow{font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:#E8C9A0; margin-bottom:8px; font-weight:700;}
+  .lm-promo h2{font-size:28px; margin:0 0 8px; color:#fff;}
+  .lm-promo p{font-size:13.5px; color:#EBD3C4; margin:0 0 18px;}
+
+  /* ---- Footer ---- */
+  .lm-footer{background:var(--navy); color:#EBD3C4; margin-top:60px;}
+  .lm-footer-grid{max-width:1200px; margin:0 auto; padding:50px 20px 24px; display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; gap:30px;}
+  .lm-footer h4{color:#fff; font-size:13px; text-transform:uppercase; letter-spacing:.05em; margin:0 0 16px;}
+  .lm-footer .brand{font-family:'Fraunces',serif; font-size:20px; color:#fff; margin-bottom:10px;}
+  .lm-footer p{font-size:13px; line-height:1.7; color:#D9BFC7;}
+  .lm-footer a{display:block; font-size:13px; color:#D9BFC7; margin-bottom:9px;}
+  .lm-footer a:hover{color:#E8C9A0;}
+  .lm-footer .social{display:flex; gap:10px; margin-top:4px;}
+  .lm-footer .social a{width:32px;height:32px;border:1px solid rgba(255,255,255,.25); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0;}
+  .lm-footer-bottom{border-top:1px solid rgba(255,255,255,.12); text-align:center; padding:16px 20px; font-size:12px; color:#B99AA2;}
+  @media(max-width:880px){ .lm-footer-grid{grid-template-columns:1fr 1fr;} }
+
+  /* ---- WhatsApp float ---- */
+  .lm-whatsapp-float{position:fixed; bottom:24px; left:24px; width:54px; height:54px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; font-size:26px; box-shadow:0 8px 20px rgba(0,0,0,.25); z-index:60; border:none;}
+
+  /* ---- About / Contact / Static pages ---- */
+  .lm-about-hero{background:linear-gradient(135deg,var(--navy),#8A2145); border-radius:16px; color:#fff; padding:60px 40px; text-align:center; margin-bottom:8px;}
+  .lm-about-hero .eyebrow{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#E8C9A0; margin-bottom:10px;}
+  .lm-about-hero h1{font-size:36px; margin:0 0 12px;}
+  .lm-about-hero p{color:#EBD3C4; max-width:560px; margin:0 auto; font-size:14.5px;}
+  .lm-about-section{max-width:820px; margin:44px auto;}
+  .lm-about-section h2{font-size:24px; margin-bottom:10px;}
+  .lm-about-section p{color:var(--muted); font-size:14.5px; line-height:1.8;}
+  .lm-whychoose{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:18px; margin:36px 0;}
+  .lm-whychoose .item{border:1px solid var(--line); border-radius:12px; padding:20px; text-align:center;}
+  .lm-whychoose .item .ic{font-size:26px; margin-bottom:10px;}
+  .lm-whychoose .item h5{font-size:14px; margin:0 0 6px;}
+  .lm-whychoose .item p{font-size:12.5px; margin:0;}
+  .lm-statrow{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:36px 0; text-align:center;}
+  .lm-statrow .n{font-family:'Fraunces',serif; font-size:32px; color:var(--navy); font-weight:700;}
+  .lm-statrow .l{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em;}
+
+  .lm-contact-layout{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;}
+  .lm-contact-info .row{display:flex; gap:12px; margin-bottom:18px; align-items:flex-start;}
+  .lm-contact-info .row .ic{width:38px;height:38px;border-radius:10px;background:var(--blue-light); display:flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .lm-contact-info .row .t{font-weight:700; font-size:13.5px;}
+  .lm-contact-info .row .d{font-size:12.5px; color:var(--muted);}
+  .lm-faq-item{border-bottom:1px solid var(--line); padding:14px 0;}
+  .lm-faq-item .q{font-weight:700; font-size:14px; cursor:pointer; display:flex; justify-content:space-between;}
+  .lm-faq-item .a{font-size:13px; color:var(--muted); margin-top:8px; display:none;}
+  .lm-faq-item.open .a{display:block;}
+
+  .lm-share-row{display:flex; gap:8px; margin-top:10px;}
+  .lm-share-row button{background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:6px 12px; font-size:12.5px; font-weight:600;}
+  .lm-sizeguide-table{width:100%; border-collapse:collapse; font-size:12.5px; margin-top:8px;}
+  .lm-sizeguide-table th,.lm-sizeguide-table td{border:1px solid var(--line); padding:7px 9px; text-align:center;}
 
   @media(max-width:880px){
     .lm-pd{grid-template-columns:1fr;}
@@ -266,43 +322,51 @@
     try{ await window.storage.set(key, JSON.stringify(val), !!shared); }catch(e){ console.error('storage set failed', key, e); }
   }
 
-  // ---------------- seed data ----------------
+  // ---------------- seed data (ChunariCouture) ----------------
+  const SEED_VERSION = 'chunari-v1';
   const CATEGORY_SEED = [
-    {id:'cat_watches', name:'Watches', icon:'⌚', enabled:true},
-    {id:'cat_audio', name:'Audio', icon:'🎧', enabled:true},
-    {id:'cat_bags', name:'Bags', icon:'🎒', enabled:true},
-    {id:'cat_shoes', name:'Footwear', icon:'👟', enabled:true},
-    {id:'cat_home', name:'Home', icon:'🏺', enabled:true},
-    {id:'cat_tech', name:'Tech', icon:'💻', enabled:true},
+    {id:'cat_bridal', name:'Bridal Wear', icon:'👰', enabled:true},
+    {id:'cat_luxury', name:'Luxury Pret', icon:'💎', enabled:true},
+    {id:'cat_unstitched', name:'Unstitched', icon:'🧵', enabled:true},
+    {id:'cat_lawn', name:'Lawn & Casual', icon:'🌸', enabled:true},
+    {id:'cat_sarees', name:'Sarees & Lehengas', icon:'🥻', enabled:true},
+    {id:'cat_accessories', name:'Accessories', icon:'💍', enabled:true},
   ];
 
   function seedProducts(){
-    const mk = (id,name,cat,price,discount,rating,reviews,stock,sku,desc,colors,sizes,img,tag) => ({
+    const mk = (id,name,cat,price,discount,rating,reviews,stock,sku,desc,colors,sizes,img,tag,fabric) => ({
       id, name, category:cat, price, discount:discount||0, rating, reviewCount:reviews, stock, sku,
-      description:desc, status:'active',
+      description:desc, status:'active', fabric: fabric||'',
       images:[img,img,img],
       variants:{colors:colors||[], sizes:sizes||[]},
       tag: tag||'', createdAt: Date.now() - Math.floor(Math.random()*1e10)
     });
     return [
-      mk('p1','Meridian Automatic Watch','cat_watches',249,15,4.6,128,14,'WAT-MER-001','A hand-assembled automatic watch with a sapphire crystal face and stainless steel case. Water resistant to 100m.',['Silver','Black','Gold'],[],'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600','bestseller'),
-      mk('p2','Wavecore Wireless Headphones','cat_audio',179,10,4.4,96,22,'AUD-WAVE-002','Active noise cancelling over-ear headphones with 40-hour battery life and plush memory-foam ear cups.',['Black','White'],[],'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600','featured'),
-      mk('p3','Atlas Leather Weekender','cat_bags',219,0,4.8,64,9,'BAG-ATL-003','Full-grain leather weekender bag with a padded laptop sleeve and brass hardware.',['Tan','Black'],[],'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600','featured'),
-      mk('p4','Trailhead Running Shoe','cat_shoes',129,20,4.3,210,0,'SHO-TRH-004','Lightweight breathable running shoe with responsive foam cushioning.',['Grey','Blue','Red'],['7','8','9','10','11'],'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600','bestseller'),
-      mk('p5','Hearth Ceramic Vase Set','cat_home',64,0,4.7,41,30,'HOM-HEA-005','Hand-glazed ceramic vase trio, ideal for dried or fresh arrangements.',['Sand','Sage'],[],'https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=600','latest'),
-      mk('p6','Nimbus 14" Laptop Sleeve','cat_tech',39,0,4.5,58,40,'TEC-NIM-006','Water-resistant neoprene sleeve with a soft interior lining and zip pocket.',['Charcoal','Navy'],[],'https://images.unsplash.com/photo-1611078489935-0cb964de46d6?w=600','latest'),
-      mk('p7','Solstice Chrono Watch','cat_watches',329,0,4.9,73,6,'WAT-SOL-007','Chronograph dress watch with a genuine leather strap and scratch-resistant glass.',['Brown','Black'],[],'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=600','featured'),
-      mk('p8','Cove Bluetooth Speaker','cat_audio',89,12,4.2,152,17,'AUD-COV-008','Portable speaker with 360° sound and IPX7 waterproofing for 12 hours of playback.',['Black','Teal'],[],'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600','bestseller'),
-      mk('p9','Field Canvas Tote','cat_bags',54,0,4.1,29,25,'BAG-FLD-009','Rugged waxed-canvas tote with leather straps, built for daily errands.',['Olive','Natural'],[],'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600','latest'),
-      mk('p10','Ridgeline Hiking Boot','cat_shoes',159,0,4.6,88,12,'SHO-RID-010','Waterproof hiking boot with a Vibram outsole for all-terrain grip.',['Brown'],['8','9','10','11','12'],'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=600','featured'),
-      mk('p11','Lumen Desk Lamp','cat_home',72,8,4.4,37,0,'HOM-LUM-011','Dimmable LED desk lamp with a warm-to-cool color range and USB-C port.',['White','Black'],[],'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600',''),
-      mk('p12','Orbit Mechanical Keyboard','cat_tech',149,0,4.7,66,19,'TEC-ORB-012','Hot-swappable mechanical keyboard with per-key RGB and a machined aluminum frame.',['Black','White'],[],'https://images.unsplash.com/photo-1595225476474-89594b114eb9?w=600','bestseller'),
+      mk('p1','Zarqash Bridal Maxi','cat_bridal',480,0,4.9,84,4,'BRD-ZRQ-001','Hand-embellished bridal maxi with dabka, zardozi and tilla embroidery on pure organza. Fully customizable.',['Maroon','Emerald','Gold'],['S','M','L','XL'],'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600','bridal','Pure Organza'),
+      mk('p2','Anaya Luxury Pret 3-Piece','cat_luxury',165,15,4.7,112,18,'LUX-ANY-002','Embroidered lawn shirt with chiffon dupatta and cambric trouser, finished with sequin borders.',['Blush','Ivory','Rust'],['S','M','L','XL'],'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600','featured','Lawn & Chiffon'),
+      mk('p3','Noor Unstitched Embroidered Suit','cat_unstitched',72,0,4.5,201,35,'UNS-NOR-003','3-piece unstitched lawn with embroidered front, digital printed dupatta and dyed trouser.',['Turquoise','Coral'],[],'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600','bestseller','Lawn'),
+      mk('p4','Rania Printed Lawn Kurti','cat_lawn',38,10,4.3,268,0,'LWN-RAN-004','Breathable printed lawn kurti, perfect for everyday wear with contrast trims.',['Sky Blue','Mustard','Wine'],['S','M','L','XL','XXL'],'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600','bestseller','Lawn'),
+      mk('p5','Meherbano Bridal Lehenga','cat_bridal',620,0,5,47,3,'BRD-MEH-005','Heavy zardozi and gota work lehenga with matching dupatta, crafted for the big day.',['Maroon','Royal Blue'],['S','M','L'],'https://images.unsplash.com/photo-1583391733981-8698e5872b47?w=600','luxury','Raw Silk'),
+      mk('p6','Kashaf Chiffon Saree','cat_sarees',145,0,4.6,58,12,'SAR-KAS-006','Pure chiffon saree with hand-finished border and matching embroidered blouse piece.',['Emerald','Black'],[],'https://images.unsplash.com/photo-1610189844351-9d76d9744bfc?w=600','featured','Pure Chiffon'),
+      mk('p7','Iman Luxury Chikankari Shirt','cat_luxury',210,0,4.8,66,9,'LUX-IMN-007','Delicate hand chikankari embroidery on lawn, paired with an organza dupatta.',['White','Powder Blue'],['S','M','L','XL'],'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=600','luxury','Lawn & Organza'),
+      mk('p8','Sana Digital Printed Lawn','cat_lawn',44,0,4.2,150,28,'LWN-SAN-008','Vivid digital floral print on soft lawn fabric, unstitched 2-piece with dupatta.',['Multicolor'],[],'https://images.unsplash.com/photo-1495385794356-15371f348c31?w=600','latest','Lawn'),
+      mk('p9','Dilnaz Net Party Wear','cat_luxury',195,20,4.4,73,0,'LUX-DIL-009','Sequinned net shirt with silk trouser — statement wear for evening events.',['Black','Maroon'],['S','M','L'],'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=600','sale','Net & Silk'),
+      mk('p10','Farah Embroidered Net Dupatta','cat_accessories',48,0,4.5,39,40,'ACC-FRH-010','Delicately embroidered net dupatta, hand-finished edges, ideal to complete any outfit.',['Ivory','Blush'],[],'https://images.unsplash.com/photo-1445205170230-053b83016050?w=600','latest','Net'),
+      mk('p11','Zoya Kundan Jewellery Set','cat_accessories',95,0,4.7,52,22,'ACC-ZOY-011','Statement kundan necklace and earring set finished with pearl drops.',['Gold','Silver'],[],'https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?w=600','featured','Kundan & Pearl'),
+      mk('p12','Mahira Velvet Bridal Shawl','cat_bridal',260,0,4.9,31,6,'BRD-MHR-012','Hand-embroidered velvet shawl with tilla work, perfect for winter bridal wear.',['Maroon','Bottle Green'],[],'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600','bridal','Velvet'),
+    ];
+  }
+  function seedBanners(){
+    return [
+      {id:'ban1', title:'New Collection', subtitle:'Discover Our Latest Designs', description:'Fresh prints and silhouettes, made for the new season.', buttonText:'Shop Now', buttonLink:'shop', image:'https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?w=1200', position:'new-arrivals', order:1, enabled:true, startDate:'', endDate:''},
+      {id:'ban2', title:'Bridal Collection', subtitle:'Timeless Elegance For Your Big Day', description:'Hand-embellished bridal wear crafted by our master artisans.', buttonText:'Explore Bridal', buttonLink:'bridal', image:'https://images.unsplash.com/photo-1583391733981-8698e5872b47?w=1200', position:'bridal', order:2, enabled:true, startDate:'', endDate:''},
+      {id:'ban3', title:'Season Sale', subtitle:'Up To 20% Off Selected Styles', description:'Limited time only — refresh your wardrobe for less.', buttonText:'Shop Sale', buttonLink:'sale', image:'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=1200', position:'sale', order:3, enabled:true, startDate:'', endDate:''},
     ];
   }
 
   const APP = {
-    products:[], categories:[], coupons:[], orders:[], reviews:[], users:[],
-    profile:null, cart:[], wishlist:[],
+    products:[], categories:[], coupons:[], orders:[], reviews:[], users:[], banners:[], messages:[],
+    profile:null, cart:[], wishlist:[], recentlyViewed:[],
     adminAuthed:false,
     route:{page:'home'},
     toasts:[],
@@ -310,28 +374,35 @@
   };
 
   async function loadAll(){
-    let [products, categories, coupons, orders, reviews, users] = await Promise.all([
+    let [seedVersion, products, categories, coupons, orders, reviews, users, banners, messages] = await Promise.all([
+      sget('catalog:seedVersion', true),
       sget('catalog:products', true), sget('catalog:categories', true), sget('catalog:coupons', true),
       sget('store:orders', true), sget('store:reviews', true), sget('store:users', true),
+      sget('catalog:banners', true), sget('store:messages', true),
     ]);
-    if(!products){ products = seedProducts(); await sset('catalog:products', products, true); }
-    if(!categories){ categories = CATEGORY_SEED; await sset('catalog:categories', categories, true); }
+    const needsReseed = seedVersion !== SEED_VERSION;
+    if(!products || needsReseed){ products = seedProducts(); await sset('catalog:products', products, true); }
+    if(!categories || needsReseed){ categories = CATEGORY_SEED; await sset('catalog:categories', categories, true); }
+    if(!banners || needsReseed){ banners = seedBanners(); await sset('catalog:banners', banners, true); }
     if(!coupons){ coupons = [
       {code:'WELCOME10', type:'percent', value:10, minOrder:0, maxDiscount:50, expiry:'2027-12-31', usageLimit:1000, used:0, active:true},
-      {code:'FLAT20', type:'fixed', value:20, minOrder:100, maxDiscount:20, expiry:'2027-12-31', usageLimit:500, used:0, active:true},
+      {code:'CHUNARI20', type:'fixed', value:20, minOrder:100, maxDiscount:20, expiry:'2027-12-31', usageLimit:500, used:0, active:true},
     ]; await sset('catalog:coupons', coupons, true); }
     if(!orders) orders = [];
-    if(!reviews) reviews = [
-      {id:uid('rv_'), productId:'p1', name:'Jordan K.', rating:5, text:'Keeps perfect time and looks even better in person.', approved:true, date:Date.now()-8.64e7*4},
-      {id:uid('rv_'), productId:'p2', name:'Priya S.', rating:4, text:'Great sound, ANC could be a touch stronger.', approved:true, date:Date.now()-8.64e7*9},
-    ];
+    if(!reviews || needsReseed){ reviews = [
+      {id:uid('rv_'), productId:'p1', name:'Ayesha R.', rating:5, text:'The embroidery detail is stunning in person, arrived beautifully packaged.', approved:true, date:Date.now()-8.64e7*4},
+      {id:uid('rv_'), productId:'p3', name:'Hina K.', rating:4, text:'Lovely fabric quality, fit was true to size.', approved:true, date:Date.now()-8.64e7*9},
+      {id:uid('rv_'), productId:'p6', name:'Sana M.', rating:5, text:'Got endless compliments wearing this to a wedding.', approved:true, date:Date.now()-8.64e7*15},
+    ]; }
     if(!users) users = [];
-    Object.assign(APP, {products, categories, coupons, orders, reviews, users});
+    if(!messages) messages = [];
+    if(needsReseed) await sset('catalog:seedVersion', SEED_VERSION, true);
+    Object.assign(APP, {products, categories, coupons, orders, reviews, users, banners, messages});
 
-    let [profile, cart, wishlist] = await Promise.all([
-      sget('account:profile', false), sget('account:cart', false), sget('account:wishlist', false),
+    let [profile, cart, wishlist, recentlyViewed] = await Promise.all([
+      sget('account:profile', false), sget('account:cart', false), sget('account:wishlist', false), sget('account:recent', false),
     ]);
-    APP.profile = profile; APP.cart = cart || []; APP.wishlist = wishlist || [];
+    APP.profile = profile; APP.cart = cart || []; APP.wishlist = wishlist || []; APP.recentlyViewed = recentlyViewed || [];
     APP.ready = true;
   }
 
@@ -341,7 +412,10 @@
   function persistOrders(){ return sset('store:orders', APP.orders, true); }
   function persistReviews(){ return sset('store:reviews', APP.reviews, true); }
   function persistUsers(){ return sset('store:users', APP.users, true); }
+  function persistBanners(){ return sset('catalog:banners', APP.banners, true); }
+  function persistMessages(){ return sset('store:messages', APP.messages, true); }
   function persistProfile(){ return sset('account:profile', APP.profile, false); }
+  function persistRecent(){ return sset('account:recent', APP.recentlyViewed, false); }
   function persistCart(){ return sset('account:cart', APP.cart, false); }
   function persistWishlist(){ return sset('account:wishlist', APP.wishlist, false); }
 
@@ -480,7 +554,7 @@
       paymentStatus, transactionRef: checkout.payment!=='cod' ? uid('txn_').toUpperCase() : null,
       status: 'New',
       createdAt: Date.now(),
-      trackingSteps: ['New','Processing','Shipped','Delivered'],
+      trackingSteps: ['New','Confirmed','Processing','Shipped','Out for Delivery','Delivered'],
     };
     // decrement stock
     items.forEach(i=>{ const p = product(i.productId); if(p) p.stock = Math.max(0, p.stock-i.qty); });
@@ -496,6 +570,18 @@
     }
     toast('Order placed successfully','success');
     nav('confirmation', {orderId: order.id});
+  }
+
+  function cancelOrderAndRestoreStock(o){
+    if(!o || o.status==='Cancelled') return;
+    if(!o.stockRestored){
+      o.items.forEach(i=>{ const p = product(i.productId); if(p) p.stock += i.qty; });
+      o.stockRestored = true;
+      persistProducts();
+    }
+    o.status='Cancelled';
+    if(o.paymentStatus==='Paid') o.paymentStatus='Refunded';
+    persistOrders();
   }
 
   // ---------------- auth (demo) ----------------
@@ -519,16 +605,85 @@
   function logout(){ APP.profile=null; persistProfile(); toast('Signed out'); nav('home'); }
 
   // ================= RENDER =================
+  const SEO_TITLES = {
+    home:'ChunariCouture — Premium Pakistani Fashion & Couture', shop:'Shop All | ChunariCouture', product:'Product | ChunariCouture',
+    cart:'Your Cart | ChunariCouture', wishlist:'Wishlist | ChunariCouture', login:'Log In | ChunariCouture', signup:'Sign Up | ChunariCouture',
+    account:'My Account | ChunariCouture', checkout:'Checkout | ChunariCouture', confirmation:'Order Confirmed | ChunariCouture',
+    invoice:'Invoice | ChunariCouture', about:'About Us | ChunariCouture', contact:'Contact Us | ChunariCouture',
+    admin:'Admin Dashboard | ChunariCouture', 'admin-login':'Admin Login | ChunariCouture',
+  };
+  function updateSEO(){
+    const page = APP.route.page;
+    let title = SEO_TITLES[page] || 'ChunariCouture';
+    let desc = 'ChunariCouture — premium Pakistani fashion and couture: bridal wear, luxury pret, unstitched lawn and accessories, handcrafted with quality and elegance.';
+    if(page==='product'){ const p = product(APP.route.id); if(p){ title = `${p.name} | ChunariCouture`; desc = p.description.slice(0,155); } }
+    if(page==='shop' && APP.route.cat){ title = `${catName(APP.route.cat)} | ChunariCouture`; }
+    document.title = title;
+    let meta = document.querySelector('meta[name="description"]');
+    if(!meta){ meta = document.createElement('meta'); meta.name='description'; document.head.appendChild(meta); }
+    meta.content = desc;
+  }
+
   function render(){
     const root = document.getElementById('lumen-root');
     if(!APP.ready){ root.innerHTML = `<div class="lm-loading"><div class="lm-spin"></div>Loading store…</div>`; return; }
+    updateSEO();
     const page = APP.route.page;
     let body = '';
     if(page==='admin' || page==='admin-login') body = renderAdmin();
-    else body = header() + `<div class="lm-wrap">${renderPage()}</div>`;
+    else {
+      body = header() + `<div class="lm-wrap">${renderPage()}</div>` + footer();
+      body += `<button class="lm-whatsapp-float" id="whatsapp-float" title="Chat with us on WhatsApp">💬</button>`;
+    }
     body += toastWrap();
     root.innerHTML = body;
     bindEvents();
+  }
+
+  function footer(){
+    return `<div class="lm-footer">
+      <div class="lm-footer-grid">
+        <div>
+          <div class="brand">ChunariCouture</div>
+          <p>Premium Pakistani fashion — bridal, luxury pret and lawn, handcrafted for the modern woman who values quality and elegance.</p>
+          <div class="social">
+            <a href="#" data-social="instagram" title="Instagram">📷</a>
+            <a href="#" data-social="facebook" title="Facebook">📘</a>
+            <a href="#" data-social="tiktok" title="TikTok">🎵</a>
+            <a href="#" data-social="whatsapp" title="WhatsApp">💬</a>
+          </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a data-nav="home">Home</a><a data-nav="shop">Shop</a>
+          <a data-nav="shop" data-collection="new-arrivals">New Arrivals</a>
+          <a data-nav="shop" data-collection="best-sellers">Best Sellers</a>
+          <a data-nav="about">About Us</a><a data-nav="contact">Contact Us</a>
+        </div>
+        <div>
+          <h4>Customer Care</h4>
+          <a data-nav="${APP.profile?'account':'login'}">My Account</a>
+          <a data-nav="account" data-tab="orders">Track Order</a>
+          <a data-static="shipping">Shipping</a>
+          <a data-static="returns">Returns &amp; Exchange</a>
+          <a data-static="privacy">Privacy Policy</a>
+          <a data-static="terms">Terms &amp; Conditions</a>
+          <a data-nav="contact">FAQs</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="tel:+922100000000">📞 +92 21 0000 0000</a>
+          <a href="mailto:hello@chunaricouture.com">✉️ hello@chunaricouture.com</a>
+          <a href="#" data-whatsapp="1">💬 WhatsApp Us</a>
+          <a href="#">🕐 Mon–Sat, 10am–8pm PKT</a>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <p>@chunaricouture on Instagram, Facebook &amp; TikTok for new drops and styling ideas.</p>
+        </div>
+      </div>
+      <div class="lm-footer-bottom">© 2026 ChunariCouture. All Rights Reserved.</div>
+    </div>`;
   }
 
   function toastWrap(){
@@ -540,7 +695,7 @@
     return `
     <div class="lm-header">
       <div class="lm-headtop">
-        <div class="lm-logo" data-nav="home"><span class="dot"></span>LUMEN</div>
+        <div class="lm-logo" data-nav="home"><span class="dot"></span>ChunariCouture</div>
         <div class="lm-search">
           <span>🔍</span>
           <input id="lm-search-input" placeholder="Search products, SKU or category…" value="${escapeHtml(APP.route.page==='shop'?(APP.route.q||''):'')}"/>
@@ -553,8 +708,15 @@
       </div>
       <div class="lm-navrow">
         <a data-nav="home" class="${APP.route.page==='home'?'active':''}">Home</a>
-        <a data-nav="shop" class="${APP.route.page==='shop'&&!APP.route.cat?'active':''}">Shop All</a>
+        <a data-nav="shop" class="${APP.route.page==='shop'&&!APP.route.cat&&!APP.route.collection?'active':''}">Shop All</a>
+        <a data-nav="shop" data-collection="new-arrivals" class="${APP.route.collection==='new-arrivals'?'active':''}">New Arrivals</a>
+        <a data-nav="shop" data-collection="best-sellers" class="${APP.route.collection==='best-sellers'?'active':''}">Best Sellers</a>
+        <a data-nav="shop" data-collection="bridal" class="${APP.route.collection==='bridal'?'active':''}">Bridal</a>
+        <a data-nav="shop" data-collection="luxury" class="${APP.route.collection==='luxury'?'active':''}">Luxury</a>
+        <a data-nav="shop" data-collection="sale" class="${APP.route.collection==='sale'?'active':''}">Sale</a>
         ${cats.map(c=>`<a data-nav="shop" data-cat="${c.id}" class="${APP.route.cat===c.id?'active':''}">${escapeHtml(c.name)}</a>`).join('')}
+        <a data-nav="about" class="${APP.route.page==='about'?'active':''}">About</a>
+        <a data-nav="contact" class="${APP.route.page==='contact'?'active':''}">Contact</a>
         <a data-nav="admin-login" style="margin-left:auto;">Admin</a>
       </div>
     </div>`;
@@ -573,6 +735,9 @@
       case 'checkout': return pageCheckout();
       case 'confirmation': return pageConfirmation();
       case 'invoice': return pageInvoice();
+      case 'about': return pageAbout();
+      case 'contact': return pageContact();
+      case 'static': return pageStatic(APP.route.topic);
       default: return pageHome();
     }
   }
@@ -602,20 +767,48 @@
     </div>`;
   }
 
+  const COLLECTION_DEFS = {
+    'new-arrivals': {label:'New Arrivals', test:(list)=>[...list].sort((a,b)=>b.createdAt-a.createdAt)},
+    'best-sellers': {label:'Best Sellers', test:(list)=>list.filter(p=>p.tag==='bestseller')},
+    'sale': {label:'Sale', test:(list)=>list.filter(p=>p.discount>0)},
+    'luxury': {label:'Luxury Collection', test:(list)=>list.filter(p=>p.category==='cat_luxury'||p.tag==='luxury')},
+    'bridal': {label:'Bridal Collection', test:(list)=>list.filter(p=>p.category==='cat_bridal'||p.tag==='bridal')},
+    'featured': {label:'Featured Collection', test:(list)=>list.filter(p=>p.tag==='featured')},
+  };
+  function bannerByPosition(pos){ return APP.banners.filter(b=>b.enabled && b.position===pos && bannerInDateRange(b)).sort((a,b)=>a.order-b.order)[0]; }
+  function bannerInDateRange(b){
+    const now = Date.now();
+    if(b.startDate && new Date(b.startDate).getTime() > now) return false;
+    if(b.endDate && new Date(b.endDate).getTime() < now) return false;
+    return true;
+  }
+  function promoBanner(b){
+    if(!b) return '';
+    return `<div class="lm-promo" style="background-image:url('${b.image}')" data-nav="shop" data-collection="${b.buttonLink}">
+      <div class="inner">
+        <div class="eyebrow">${escapeHtml(b.title)}</div>
+        <h2>${escapeHtml(b.subtitle)}</h2>
+        <p>${escapeHtml(b.description)}</p>
+        <button class="lm-btn" data-nav="shop" data-collection="${b.buttonLink}">${escapeHtml(b.buttonText)} <span>→</span></button>
+      </div>
+    </div>`;
+  }
+
   function pageHome(){
     const active = APP.products.filter(p=>p.status==='active');
-    const featured = active.filter(p=>p.tag==='featured').slice(0,4);
-    const latest = [...active].sort((a,b)=>b.createdAt-a.createdAt).slice(0,4);
+    const newArrivals = [...active].sort((a,b)=>b.createdAt-a.createdAt).slice(0,4);
     const best = active.filter(p=>p.tag==='bestseller').slice(0,4);
+    const featured = active.filter(p=>p.tag==='featured').slice(0,4);
+    const approved = APP.reviews.filter(r=>r.approved).slice(0,3);
     return `
       <div class="lm-hero">
         <div>
-          <div class="eyebrow">New Season Arrivals</div>
-          <h1>Considered goods for everyday life.</h1>
-          <p>Watches, audio, bags and more — chosen for craft, not clutter. Free shipping on orders over $75.</p>
+          <div class="eyebrow">New Season Collection</div>
+          <h1>Elegance, woven into every thread.</h1>
+          <p>Bridal, luxury pret and lawn — handcrafted Pakistani couture for the modern woman. Free shipping on orders over $75.</p>
           <div style="display:flex;gap:10px;">
             <button class="lm-btn" data-nav="shop">Shop All <span>→</span></button>
-            <button class="lm-btn ghost" data-nav="shop" data-cat="cat_watches">Explore Watches</button>
+            <button class="lm-btn ghost" data-nav="shop" data-collection="bridal">Explore Bridal</button>
           </div>
         </div>
       </div>
@@ -626,12 +819,39 @@
             <span>${escapeHtml(c.name)}</span>
           </div>`).join('')}
       </div>
-      <div class="lm-sechead"><h2>Featured Products</h2><a data-nav="shop">View all →</a></div>
-      <div class="lm-grid">${featured.map(productCard).join('') || emptyRow('No featured products yet.')}</div>
-      <div class="lm-sechead"><h2>Best Sellers</h2><a data-nav="shop">View all →</a></div>
+      <div class="lm-sechead"><h2>New Arrivals</h2><a data-nav="shop" data-collection="new-arrivals">View all →</a></div>
+      <div class="lm-grid">${newArrivals.map(productCard).join('') || emptyRow('No products yet.')}</div>
+
+      ${promoBanner(bannerByPosition('new-arrivals') || bannerByPosition('sale'))}
+
+      <div class="lm-sechead"><h2>Best Sellers</h2><a data-nav="shop" data-collection="best-sellers">View all →</a></div>
       <div class="lm-grid">${best.map(productCard).join('') || emptyRow('No best sellers yet.')}</div>
-      <div class="lm-sechead"><h2>Latest Arrivals</h2><a data-nav="shop">View all →</a></div>
-      <div class="lm-grid">${latest.map(productCard).join('') || emptyRow('No products yet.')}</div>
+
+      ${promoBanner(bannerByPosition('bridal') || bannerByPosition('luxury'))}
+
+      <div class="lm-sechead"><h2>Featured Collection</h2><a data-nav="shop" data-collection="featured">View all →</a></div>
+      <div class="lm-grid">${featured.map(productCard).join('') || emptyRow('No featured products yet.')}</div>
+
+      <div class="lm-sechead"><h2>What Our Customers Say</h2></div>
+      <div class="lm-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+        ${approved.map(r=>`<div class="lm-card"><div class="body">
+          <div class="stars">${stars(r.rating)}</div>
+          <p style="font-size:13.5px;color:var(--muted);">"${escapeHtml(r.text)}"</p>
+          <div style="font-weight:700;font-size:13px;">${escapeHtml(r.name)}</div>
+        </div></div>`).join('') || emptyRow('No reviews yet.')}
+      </div>
+
+      <div class="lm-hero" style="margin-top:44px;text-align:center;justify-content:center;">
+        <div style="max-width:480px;">
+          <div class="eyebrow">Stay in the loop</div>
+          <h1 style="font-size:26px;">Join our newsletter</h1>
+          <p>Be first to know about new collections, sales and styling edits.</p>
+          <div style="display:flex;gap:8px;">
+            <input id="newsletter-email" placeholder="Your email address" style="flex:1;border-radius:999px;border:none;padding:11px 16px;font-size:13px;"/>
+            <button class="lm-btn" id="newsletter-submit">Subscribe</button>
+          </div>
+        </div>
+      </div>
     `;
   }
   function emptyRow(msg){ return `<div class="lm-empty" style="grid-column:1/-1;">${msg}</div>`; }
@@ -641,6 +861,8 @@
     const filters = r.filters || {cat: r.cat||'', min:'', max:'', rating:'', sort:'relevance'};
     r.filters = filters;
     let list = APP.products.filter(p=>p.status==='active');
+    const coll = r.collection && COLLECTION_DEFS[r.collection];
+    if(coll) list = coll.test(list);
     if(r.q) {
       const q = r.q.toLowerCase();
       list = list.filter(p=>p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q) || catName(p.category).toLowerCase().includes(q));
@@ -654,9 +876,10 @@
     else if(filters.sort==='rating') list.sort((a,b)=>avgRating(b)-avgRating(a));
     else if(filters.sort==='newest') list.sort((a,b)=>b.createdAt-a.createdAt);
 
+    const heading = r.q? `Results for "${escapeHtml(r.q)}"` : (coll? coll.label : (filters.cat? catName(filters.cat) : 'Shop All'));
     return `
     <div class="lm-toolbar">
-      <h2 style="margin:0;">${r.q? `Results for "${escapeHtml(r.q)}"` : (filters.cat? catName(filters.cat) : 'Shop All')} <span style="color:var(--muted);font-size:14px;font-weight:400;">(${list.length})</span></h2>
+      <h2 style="margin:0;">${heading} <span style="color:var(--muted);font-size:14px;font-weight:400;">(${list.length})</span></h2>
       <select class="lm-select" id="lm-sort">
         <option value="relevance" ${filters.sort==='relevance'?'selected':''}>Sort: Relevance</option>
         <option value="price-asc" ${filters.sort==='price-asc'?'selected':''}>Price: Low to High</option>
@@ -696,17 +919,19 @@
     if(!p) return `<div class="lm-empty">Product not found.</div>`;
     const st = APP.route.pstate || {img:0, color:p.variants.colors[0]||null, size:p.variants.sizes[0]||null, qty:1, tab:'desc'};
     APP.route.pstate = st;
+    trackRecentlyViewed(p.id);
     const fp = finalPrice(p);
     const rv = approvedReviews(p.id);
     const related = APP.products.filter(x=>x.category===p.category && x.id!==p.id && x.status==='active').slice(0,4);
+    const recent = APP.recentlyViewed.filter(id=>id!==p.id).map(id=>product(id)).filter(Boolean).slice(0,4);
     return `
     <div class="lm-pd">
       <div class="lm-pd-gallery">
-        <div class="lm-pd-main"><img src="${p.images[st.img]}"/></div>
-        <div class="lm-pd-thumbs">${p.images.map((im,i)=>`<img src="${im}" class="${i===st.img?'active':''}" data-thumb="${i}"/>`).join('')}</div>
+        <div class="lm-pd-main"><img src="${p.images[st.img]}" alt="${escapeHtml(p.name)}"/></div>
+        <div class="lm-pd-thumbs">${p.images.map((im,i)=>`<img src="${im}" class="${i===st.img?'active':''}" data-thumb="${i}" alt="${escapeHtml(p.name)} view ${i+1}"/>`).join('')}</div>
       </div>
       <div class="lm-pd-info">
-        <div class="cat" style="font-size:12px;color:var(--muted);text-transform:uppercase;">${escapeHtml(catName(p.category))} · SKU ${p.sku}</div>
+        <div class="cat" style="font-size:12px;color:var(--muted);text-transform:uppercase;">${escapeHtml(catName(p.category))} · SKU ${p.sku}${p.fabric?` · ${escapeHtml(p.fabric)}`:''}</div>
         <h1>${escapeHtml(p.name)}</h1>
         <div class="stars">${stars(avgRating(p))} <span style="color:var(--muted);">(${rv.length} reviews)</span></div>
         <div class="lm-pd-price">
@@ -726,15 +951,52 @@
           <button class="lm-btn" data-buynow-detail="1" ${p.stock<=0?'disabled':''}>Buy Now</button>
           <button class="lm-btn subtle" data-wish="${p.id}" style="flex:0 0 auto;">${isWished(p.id)?'♥ Saved':'♡ Wishlist'}</button>
         </div>
+        <div class="lm-share-row">
+          <span style="font-size:12px;color:var(--muted);align-self:center;">Share:</span>
+          <button data-share="copy" data-pid="${p.id}">🔗 Copy Link</button>
+          <button data-share="whatsapp" data-pid="${p.id}">💬 WhatsApp</button>
+        </div>
         <div class="lm-tabs">
           <button class="${st.tab==='desc'?'active':''}" data-tab="desc">Description</button>
           <button class="${st.tab==='reviews'?'active':''}" data-tab="reviews">Reviews (${rv.length})</button>
+          <button class="${st.tab==='sizeguide'?'active':''}" data-tab="sizeguide">Size Guide</button>
+          <button class="${st.tab==='shipping'?'active':''}" data-tab="shipping">Shipping &amp; Returns</button>
         </div>
-        ${st.tab==='desc'? `<p style="font-size:14px;color:var(--muted);">${escapeHtml(p.description)} Crafted with attention to detail and backed by our 30-day return policy.</p>` : renderReviewsTab(p)}
+        ${st.tab==='desc'? `<p style="font-size:14px;color:var(--muted);">${escapeHtml(p.description)}${p.fabric?` Made from ${escapeHtml(p.fabric)}.`:''}</p>` : ''}
+        ${st.tab==='reviews'? renderReviewsTab(p) : ''}
+        ${st.tab==='sizeguide'? renderSizeGuide() : ''}
+        ${st.tab==='shipping'? renderShippingInfo() : ''}
       </div>
     </div>
     ${related.length?`<div class="lm-sechead" style="margin-top:50px;"><h2>Related Products</h2></div><div class="lm-grid">${related.map(productCard).join('')}</div>`:''}
+    ${recent.length?`<div class="lm-sechead" style="margin-top:50px;"><h2>Recently Viewed</h2></div><div class="lm-grid">${recent.map(productCard).join('')}</div>`:''}
     `;
+  }
+  function trackRecentlyViewed(pid){
+    APP.recentlyViewed = [pid, ...APP.recentlyViewed.filter(id=>id!==pid)].slice(0,10);
+    persistRecent();
+  }
+  function renderSizeGuide(){
+    return `<div>
+      <p style="font-size:13px;color:var(--muted);">All measurements in inches. For the best fit, measure yourself and compare to the chart below.</p>
+      <table class="lm-sizeguide-table">
+        <thead><tr><th>Size</th><th>Bust</th><th>Waist</th><th>Hip</th><th>Length</th></tr></thead>
+        <tbody>
+          <tr><td>S</td><td>34</td><td>28</td><td>36</td><td>42</td></tr>
+          <tr><td>M</td><td>36</td><td>30</td><td>38</td><td>43</td></tr>
+          <tr><td>L</td><td>38</td><td>32</td><td>40</td><td>44</td></tr>
+          <tr><td>XL</td><td>40</td><td>34</td><td>42</td><td>45</td></tr>
+          <tr><td>XXL</td><td>42</td><td>36</td><td>44</td><td>46</td></tr>
+        </tbody>
+      </table>
+    </div>`;
+  }
+  function renderShippingInfo(){
+    return `<div style="font-size:13.5px;color:var(--muted);line-height:1.8;">
+      <p><strong style="color:var(--ink);">Shipping:</strong> Standard delivery in 4–6 business days, express in 1–2 business days. Free standard shipping on orders over $75.</p>
+      <p><strong style="color:var(--ink);">Returns:</strong> Unworn items with tags can be returned or exchanged within 7 days of delivery. Bridal and made-to-measure pieces are final sale unless defective.</p>
+      <p><strong style="color:var(--ink);">Need help?</strong> <a data-nav="contact" style="color:var(--blue);font-weight:600;">Contact our support team</a>.</p>
+    </div>`;
   }
 
   function renderReviewsTab(p){
@@ -870,9 +1132,10 @@
     </div>`;
   }
 
-  const TRACK_STAGES = ['New','Processing','Shipped','Delivered'];
+  const TRACK_STAGES = ['New','Confirmed','Processing','Shipped','Out for Delivery','Delivered'];
+  const TRACK_LABELS = {New:'Order Placed', Confirmed:'Confirmed', Processing:'Processing', Shipped:'Shipped', 'Out for Delivery':'Out for Delivery', Delivered:'Delivered'};
   function orderRow(o){
-    const cancellable = ['New','Processing'].includes(o.status);
+    const cancellable = ['New','Confirmed','Processing'].includes(o.status);
     const stageIdx = TRACK_STAGES.indexOf(o.status);
     return `<div class="lm-ordrow">
       <div class="top">
@@ -880,7 +1143,7 @@
         <div><span class="lm-status-pill ${o.status.toLowerCase()}">${o.status}</span> <span class="lm-status-pill ${o.paymentStatus.toLowerCase()}">${o.paymentStatus}</span></div>
       </div>
       <div style="font-size:13px;color:var(--muted);">${o.items.map(i=>i.name+' ×'+i.qty).join(', ')}</div>
-      ${o.status!=='Cancelled' ? `<div class="lm-track">${TRACK_STAGES.map((s,i)=>`<div class="lm-tstep ${i<=stageIdx?'done':''}"><div class="dot"></div><div class="lbl">${s}</div></div>`).join('')}</div>` : ''}
+      ${o.status!=='Cancelled' ? `<div class="lm-track">${TRACK_STAGES.map((s,i)=>`<div class="lm-tstep ${i<=stageIdx?'done':''}"><div class="dot"></div><div class="lbl">${TRACK_LABELS[s]}</div></div>`).join('')}</div>` : ''}
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">
         <div style="font-weight:700;">${money(o.total)}</div>
         <div style="display:flex;gap:8px;">
@@ -973,7 +1236,7 @@
   function receiptBlock(o){
     return `<div class="lm-receipt">
       <div class="rhead">
-        <div><div style="font-weight:700;">LUMEN</div><div style="font-size:12px;color:var(--muted);">Order ${o.orderNumber}</div></div>
+        <div><div style="font-weight:700;">ChunariCouture</div><div style="font-size:12px;color:var(--muted);">Order ${o.orderNumber}</div></div>
         <div style="text-align:right;"><span class="lm-status-pill ${o.paymentStatus.toLowerCase()}">${o.paymentStatus}</span><div style="font-size:11.5px;color:var(--muted);margin-top:4px;">${fmtDate(o.createdAt)}</div></div>
       </div>
       <div class="rbody">
@@ -1003,7 +1266,7 @@
       <div class="lm-receipt" style="text-align:left;">
         <div class="rhead">
           <div>
-            <div style="font-weight:700;font-size:16px;">LUMEN</div>
+            <div style="font-weight:700;font-size:16px;">ChunariCouture</div>
             <div style="font-size:12px;color:var(--muted);">Invoice #INV-${o.orderNumber}</div>
             <div style="font-size:12px;color:var(--muted);">Order #${o.orderNumber} · ${fmtDate(o.createdAt)}</div>
           </div>
@@ -1031,6 +1294,92 @@
     </div>`;
   }
 
+  const FAQS = [
+    {q:'How long does delivery take?', a:'Standard shipping takes 4–6 business days across Pakistan; express shipping arrives in 1–2 business days.'},
+    {q:'Can I return or exchange an item?', a:'Yes — unworn items with tags can be returned or exchanged within 7 days of delivery. See our Returns & Exchange policy for details.'},
+    {q:'Do you offer custom bridal stitching?', a:'Yes, our bridal and luxury pieces can be tailored to your measurements. Mention this in your order notes or contact our support team.'},
+    {q:'What payment methods do you accept?', a:'We accept Cash on Delivery, credit/debit cards and bank transfer. Card details are never stored on our servers.'},
+  ];
+
+  function pageAbout(){
+    const stats = [
+      {n:'8+', l:'Years of Craft'},
+      {n:'25k+', l:'Happy Customers'},
+      {n:'500+', l:'Handmade Designs'},
+      {n:'4.8★', l:'Average Rating'},
+    ];
+    const why = [
+      {ic:'💎', t:'Premium Quality', d:'Finest fabrics and finishing on every piece.'},
+      {ic:'🎨', t:'Elegant Designs', d:'Timeless silhouettes with a modern edge.'},
+      {ic:'💰', t:'Affordable Luxury', d:'Couture craftsmanship at honest prices.'},
+      {ic:'🔒', t:'Secure Payments', d:'Your details are always protected.'},
+      {ic:'🚚', t:'Fast Delivery', d:'Reliable shipping across Pakistan &amp; beyond.'},
+      {ic:'💬', t:'Customer Support', d:'A team that genuinely cares, always reachable.'},
+      {ic:'↩️', t:'Easy Returns', d:'Hassle-free 7-day returns &amp; exchanges.'},
+    ];
+    return `
+    <div class="lm-about-hero">
+      <div class="eyebrow">Our Story</div>
+      <h1>Crafted for the woman who wears her heritage with pride.</h1>
+      <p>ChunariCouture began as a small atelier with a simple belief: that Pakistani craftsmanship deserves a global stage. Today we bring hand-embroidered bridal wear, luxury pret and everyday lawn to customers who value quality, style and authenticity.</p>
+    </div>
+    <div class="lm-about-section">
+      <h2>Our Mission</h2>
+      <p>To celebrate South Asian craftsmanship by creating clothing that feels as good as it looks — using premium fabrics, skilled artisans and honest pricing, while delivering an effortless shopping experience and standing behind every order with genuine customer care.</p>
+    </div>
+    <div class="lm-about-section">
+      <h2>Our Vision</h2>
+      <p>To become the most trusted name in premium Pakistani fashion — creating a couture experience customers love returning to, one that blends tradition with contemporary elegance for every occasion, from everyday wear to the biggest day of your life.</p>
+    </div>
+    <div class="lm-about-section">
+      <div class="lm-statrow">${stats.map(s=>`<div><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join('')}</div>
+    </div>
+    <div class="lm-about-section">
+      <h2 style="text-align:center;">Why Choose ChunariCouture</h2>
+      <div class="lm-whychoose">${why.map(w=>`<div class="item"><div class="ic">${w.ic}</div><h5>${w.t}</h5><p>${w.d}</p></div>`).join('')}</div>
+      <div style="text-align:center;margin-top:10px;"><button class="lm-btn" data-nav="shop">Shop Collection <span>→</span></button></div>
+    </div>`;
+  }
+
+  function pageContact(){
+    return `
+    <h1 style="font-size:28px;">Get in Touch</h1>
+    <p style="color:var(--muted);font-size:14px;margin-top:-8px;margin-bottom:30px;">We'd love to hear from you — questions, custom orders or feedback.</p>
+    <div class="lm-contact-layout">
+      <div class="lm-panel" style="border:1px solid var(--line);border-radius:12px;padding:24px;">
+        <h3 style="margin-top:0;">Send us a Message</h3>
+        <div class="lm-field"><label>Name</label><input id="ct-name" placeholder="Your name"/></div>
+        <div class="lm-field"><label>Email</label><input id="ct-email" type="email" placeholder="you@example.com"/></div>
+        <div class="lm-field"><label>Phone</label><input id="ct-phone" placeholder="+92 300 0000000"/></div>
+        <div class="lm-field"><label>Subject</label><input id="ct-subject" placeholder="How can we help?"/></div>
+        <div class="lm-field"><label>Message</label><textarea id="ct-message" rows="4" placeholder="Write your message…"></textarea></div>
+        <button class="lm-btn" id="ct-submit" style="width:100%;justify-content:center;">Send Message</button>
+      </div>
+      <div>
+        <div class="lm-contact-info">
+          <div class="row"><div class="ic">📞</div><div><div class="t">Phone</div><div class="d">+92 21 0000 0000</div></div></div>
+          <div class="row"><div class="ic">✉️</div><div><div class="t">Email</div><div class="d">hello@chunaricouture.com</div></div></div>
+          <div class="row"><div class="ic">💬</div><div><div class="t">WhatsApp</div><div class="d">+92 300 0000000 — chat with our stylists</div></div></div>
+          <div class="row"><div class="ic">🕐</div><div><div class="t">Business Hours</div><div class="d">Mon–Sat, 10:00am – 8:00pm PKT</div></div></div>
+          <div class="row"><div class="ic">📷</div><div><div class="t">Social</div><div class="d">@chunaricouture on Instagram, Facebook &amp; TikTok</div></div></div>
+        </div>
+        <h3 style="margin:26px 0 6px;font-size:16px;">Frequently Asked Questions</h3>
+        ${FAQS.map((f,i)=>`<div class="lm-faq-item" data-faq="${i}"><div class="q">${escapeHtml(f.q)} <span>+</span></div><div class="a">${escapeHtml(f.a)}</div></div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  const STATIC_PAGES = {
+    shipping: {title:'Shipping Policy', body:'We offer standard shipping (4–6 business days) and express shipping (1–2 business days) across Pakistan. Orders over $75 qualify for free standard shipping. International shipping is available on request — contact our support team for rates.'},
+    returns: {title:'Returns & Exchange', body:'Unworn, unwashed items with original tags can be returned or exchanged within 7 days of delivery. Bridal and made-to-measure pieces are final sale unless defective. To start a return, contact us via the Contact page with your order number.'},
+    privacy: {title:'Privacy Policy', body:'ChunariCouture collects only the information needed to process your orders — name, contact details and shipping address. We never sell your data, and payment details are handled securely and never stored on our servers.'},
+    terms: {title:'Terms & Conditions', body:'By shopping with ChunariCouture you agree to our pricing, shipping and return policies as listed on this site. All designs, images and content are the property of ChunariCouture and may not be reproduced without permission.'},
+  };
+  function pageStatic(topic){
+    const p = STATIC_PAGES[topic] || {title:'Information', body:'Content coming soon.'};
+    return `<div class="lm-about-section"><h1 style="font-size:26px;">${escapeHtml(p.title)}</h1><p>${escapeHtml(p.body)}</p></div>`;
+  }
+
   // ================= ADMIN =================
   function renderAdmin(){
     if(!APP.adminAuthed){
@@ -1046,14 +1395,18 @@
     if(tab==='dashboard') content = adminDashboard();
     else if(tab==='products') content = adminProducts();
     else if(tab==='categories') content = adminCategories();
+    else if(tab==='banners') content = adminBanners();
     else if(tab==='orders') content = adminOrders();
     else if(tab==='coupons') content = adminCoupons();
     else if(tab==='reviews') content = adminReviews();
     else if(tab==='customers') content = adminCustomers();
+    else if(tab==='inventory') content = adminInventory();
+    else if(tab==='messages') content = adminMessages();
+    else if(tab==='settings') content = adminSettings();
     return `<div class="lm-adminshell">
       <div class="lm-asidebar">
-        <div class="lg"><span class="dot" style="background:#fff;width:8px;height:8px;border-radius:50%;display:inline-block;"></span> LUMEN Admin</div>
-        ${[['dashboard','Dashboard'],['products','Products'],['categories','Categories'],['orders','Orders'],['coupons','Coupons'],['reviews','Reviews'],['customers','Customers']].map(([k,l])=>`<a data-admintab="${k}" class="${tab===k?'active':''}">${l}</a>`).join('')}
+        <div class="lg"><span class="dot" style="background:#fff;width:8px;height:8px;border-radius:50%;display:inline-block;"></span> ChunariCouture Admin</div>
+        ${[['dashboard','Dashboard'],['products','Products'],['categories','Categories'],['banners','Banners'],['orders','Orders'],['customers','Customers'],['coupons','Coupons'],['reviews','Reviews'],['messages','Messages'+(APP.messages.filter(m=>!m.read).length?` (${APP.messages.filter(m=>!m.read).length})`:'')],['inventory','Inventory'],['settings','Settings']].map(([k,l])=>`<a data-admintab="${k}" class="${tab===k?'active':''}">${l}</a>`).join('')}
         <a data-nav="home" style="margin-top:16px;border-top:1px solid rgba(255,255,255,.15);padding-top:14px;">← Back to Store</a>
         <a href="#" id="admin-logout">Log Out</a>
       </div>
@@ -1143,7 +1496,7 @@
           <input class="lm-select" id="order-search" placeholder="Search order # or customer" value="${escapeHtml(f.q)}"/>
           <select class="lm-select" id="order-status-filter">
             <option value="">All statuses</option>
-            ${['New','Processing','Shipped','Delivered','Cancelled'].map(s=>`<option value="${s}" ${f.status===s?'selected':''}>${s}</option>`).join('')}
+            ${['New','Confirmed','Processing','Shipped','Out for Delivery','Delivered','Cancelled'].map(s=>`<option value="${s}" ${f.status===s?'selected':''}>${s}</option>`).join('')}
           </select>
         </div>
       </div>
@@ -1206,6 +1559,79 @@
     </div>`;
   }
 
+  function adminBanners(){
+    return `<div class="lm-panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <h3 style="margin:0;">Banners</h3><button class="lm-btn small" id="new-banner">+ Add Banner</button>
+      </div>
+      <table class="lm-table"><thead><tr><th>Preview</th><th>Banner</th><th>Status</th><th>Position</th><th>Start</th><th>End</th><th>Actions</th></tr></thead><tbody>
+      ${APP.banners.slice().sort((a,b)=>a.order-b.order).map(b=>`<tr>
+        <td><img src="${b.image}"/></td>
+        <td>${escapeHtml(b.title)}<div style="font-size:11.5px;color:var(--muted);">${escapeHtml(b.subtitle)}</div></td>
+        <td><span class="lm-status-pill ${b.enabled?'active':'inactive'}">${b.enabled?'Enabled':'Disabled'}</span></td>
+        <td>${escapeHtml(b.position)}</td>
+        <td>${b.startDate||'—'}</td>
+        <td>${b.endDate||'—'}</td>
+        <td class="actions"><button class="lm-iconbtn" data-editbanner="${b.id}">Edit</button><button class="lm-iconbtn" data-togglebanner="${b.id}">${b.enabled?'Disable':'Enable'}</button><button class="lm-iconbtn" data-delbanner="${b.id}">Delete</button></td>
+      </tr>`).join('') || `<tr><td colspan="7" style="color:var(--muted);">No banners yet.</td></tr>`}
+      </tbody></table>
+    </div>`;
+  }
+
+  function adminInventory(){
+    const list = [...APP.products].sort((a,b)=>a.stock-b.stock);
+    const lowStock = list.filter(p=>p.stock>0 && p.stock<=5).length;
+    const outStock = list.filter(p=>p.stock<=0).length;
+    return `
+    <div class="lm-statgrid">
+      <div class="lm-statcard"><div class="lbl">Total SKUs</div><div class="val">${list.length}</div></div>
+      <div class="lm-statcard"><div class="lbl">Low Stock (≤5)</div><div class="val" style="color:var(--warn);">${lowStock}</div></div>
+      <div class="lm-statcard"><div class="lbl">Out of Stock</div><div class="val" style="color:var(--danger);">${outStock}</div></div>
+    </div>
+    <div class="lm-panel">
+      <h3>Stock Levels</h3>
+      <table class="lm-table"><thead><tr><th>Product</th><th>SKU</th><th>Stock</th><th>Status</th><th>Update</th></tr></thead><tbody>
+      ${list.map(p=>`<tr>
+        <td>${escapeHtml(p.name)}</td><td class="mono">${p.sku}</td>
+        <td>${p.stock}</td>
+        <td>${p.stock<=0?`<span class="lm-status-pill inactive">Out of Stock</span>`:p.stock<=5?`<span class="lm-status-pill pending">Low Stock</span>`:`<span class="lm-status-pill active">In Stock</span>`}</td>
+        <td><div style="display:flex;gap:6px;"><input class="lm-select" style="width:70px;" type="number" min="0" value="${p.stock}" data-stockinput="${p.id}"/><button class="lm-iconbtn" data-updatestock="${p.id}">Save</button></div></td>
+      </tr>`).join('') || `<tr><td colspan="5" style="color:var(--muted);">No products.</td></tr>`}
+      </tbody></table>
+    </div>`;
+  }
+
+  function adminMessages(){
+    const list = [...APP.messages].sort((a,b)=>b.date-a.date);
+    return `<div class="lm-panel">
+      <h3>Contact Messages (${list.length})</h3>
+      ${list.map(m=>`<div class="lm-ordrow">
+        <div class="top">
+          <div><strong>${escapeHtml(m.name)}</strong> <span style="color:var(--muted);font-size:12px;">· ${escapeHtml(m.email)}${m.phone?' · '+escapeHtml(m.phone):''}</span></div>
+          <div>${!m.read?`<span class="lm-status-pill pending">New</span>`:''} <span style="color:var(--muted);font-size:12px;">${fmtDate(m.date)}</span></div>
+        </div>
+        <div style="font-weight:700;font-size:13.5px;margin-top:4px;">${escapeHtml(m.subject||'(No subject)')}</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;">${escapeHtml(m.message)}</div>
+        <div style="margin-top:10px;display:flex;gap:8px;">
+          ${!m.read?`<button class="lm-iconbtn" data-readmsg="${m.id}">Mark as Read</button>`:''}
+          <button class="lm-iconbtn" data-delmsg="${m.id}">Delete</button>
+        </div>
+      </div>`).join('') || '<p style="color:var(--muted);">No messages yet.</p>'}
+    </div>`;
+  }
+
+  function adminSettings(){
+    return `<div class="lm-panel">
+      <h3>Store Settings</h3>
+      <p style="font-size:13px;color:var(--muted);">These demo settings are for reference — since this is a client-side demo store, they are not wired to backend services, but this is where store-wide configuration would live (store name, contact details, currency, tax, and payment gateway API keys sourced from environment variables).</p>
+      <div class="lm-field"><label>Store Name</label><input value="ChunariCouture" disabled/></div>
+      <div class="lm-field"><label>Support Email</label><input value="hello@chunaricouture.com" disabled/></div>
+      <div class="lm-field"><label>Support Phone</label><input value="+92 21 0000 0000" disabled/></div>
+      <div class="lm-field"><label>Currency</label><input value="USD ($)" disabled/></div>
+      <div class="lm-field"><label>Payment Gateway API Key</label><input value="Configured via environment variable — never exposed client-side" disabled/></div>
+    </div>`;
+  }
+
   // ---------------- Admin modals ----------------
   let modal = null; // {type, data}
   function modalHtml(){
@@ -1214,11 +1640,12 @@
     if(modal.type==='category') return categoryModal(modal.data);
     if(modal.type==='coupon') return couponModal(modal.data);
     if(modal.type==='order') return orderModal(modal.data);
+    if(modal.type==='banner') return bannerModal(modal.data);
     return '';
   }
   function productModal(p){
     const isNew = !p;
-    p = p || {id:null, name:'', category:APP.categories[0]?.id||'', price:0, discount:0, stock:0, sku:'', description:'', status:'active', images:['https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600'], variants:{colors:[],sizes:[]}};
+    p = p || {id:null, name:'', category:APP.categories[0]?.id||'', price:0, discount:0, stock:0, sku:'', description:'', status:'active', fabric:'', images:['https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600'], variants:{colors:[],sizes:[]}};
     return `<div class="lm-modal-bg" id="modal-bg"><div class="lm-modal lm-modalpos">
       <button class="close lm-iconbtn" id="modal-close">✕</button>
       <h3>${isNew?'Add Product':'Edit Product'}</h3>
@@ -1236,6 +1663,7 @@
         <div class="lm-field" style="flex:1;"><label>Stock</label><input id="m-stock" type="number" value="${p.stock}"/></div>
         <div class="lm-field" style="flex:1;"><label>Status</label><select id="m-status"><option value="active" ${p.status==='active'?'selected':''}>Active</option><option value="inactive" ${p.status==='inactive'?'selected':''}>Inactive</option></select></div>
       </div>
+      <div class="lm-field"><label>Fabric</label><input id="m-fabric" placeholder="e.g. Pure Chiffon" value="${escapeHtml(p.fabric||'')}"/></div>
       <div class="lm-field"><label>Image URL</label><input id="m-image" value="${escapeHtml(p.images[0])}"/></div>
       <div style="display:flex;gap:10px;">
         <div class="lm-field" style="flex:1;"><label>Colors (comma separated)</label><input id="m-colors" value="${escapeHtml((p.variants.colors||[]).join(', '))}"/></div>
@@ -1276,6 +1704,40 @@
       <button class="lm-btn" id="mp-save" data-code="${isNew?'':c.code}" style="width:100%;justify-content:center;">${isNew?'Create Coupon':'Save Changes'}</button>
     </div></div>`;
   }
+  function bannerModal(b){
+    const isNew = !b;
+    b = b || {id:null, title:'', subtitle:'', description:'', buttonText:'Shop Now', buttonLink:'new-arrivals', image:'https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?w=1200', position:'new-arrivals', order:APP.banners.length+1, enabled:true, startDate:'', endDate:''};
+    return `<div class="lm-modal-bg" id="modal-bg"><div class="lm-modal lm-modalpos" style="max-width:600px;">
+      <button class="close lm-iconbtn" id="modal-close">✕</button>
+      <h3>${isNew?'Add Banner':'Edit Banner'}</h3>
+      <div class="lm-field"><label>Title</label><input id="mb-title" value="${escapeHtml(b.title)}" placeholder="NEW COLLECTION"/></div>
+      <div class="lm-field"><label>Subtitle</label><input id="mb-subtitle" value="${escapeHtml(b.subtitle)}" placeholder="Discover Our Latest Designs"/></div>
+      <div class="lm-field"><label>Description</label><textarea id="mb-desc" rows="2">${escapeHtml(b.description)}</textarea></div>
+      <div style="display:flex;gap:10px;">
+        <div class="lm-field" style="flex:1;"><label>Button Text</label><input id="mb-btntext" value="${escapeHtml(b.buttonText)}"/></div>
+        <div class="lm-field" style="flex:1;"><label>Button Link (collection)</label>
+          <select id="mb-btnlink">${Object.entries(COLLECTION_DEFS).map(([k,v])=>`<option value="${k}" ${b.buttonLink===k?'selected':''}>${v.label}</option>`).join('')}</select>
+        </div>
+      </div>
+      <div class="lm-field"><label>Banner Image URL</label><input id="mb-image" value="${escapeHtml(b.image)}"/></div>
+      <div style="display:flex;gap:10px;">
+        <div class="lm-field" style="flex:1;"><label>Position (page slot)</label>
+          <select id="mb-position">${['new-arrivals','bridal','luxury','sale','best-sellers','seasonal'].map(p=>`<option value="${p}" ${b.position===p?'selected':''}>${p}</option>`).join('')}</select>
+        </div>
+        <div class="lm-field" style="flex:1;"><label>Display Order</label><input id="mb-order" type="number" value="${b.order}"/></div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <div class="lm-field" style="flex:1;"><label>Start Date (optional)</label><input id="mb-start" type="date" value="${b.startDate}"/></div>
+        <div class="lm-field" style="flex:1;"><label>End Date (optional)</label><input id="mb-end" type="date" value="${b.endDate}"/></div>
+      </div>
+      <div class="lm-field"><label>Preview</label>
+        <div class="lm-promo" style="min-height:140px;background-image:url('${escapeHtml(b.image)}');" id="mb-preview">
+          <div class="inner"><div class="eyebrow">${escapeHtml(b.title)||'TITLE'}</div><h2 style="font-size:20px;">${escapeHtml(b.subtitle)||'Subtitle'}</h2></div>
+        </div>
+      </div>
+      <button class="lm-btn" id="mb-save" data-id="${b.id||''}" style="width:100%;justify-content:center;">${isNew?'Create Banner':'Save Changes'}</button>
+    </div></div>`;
+  }
   function orderModal(o){
     return `<div class="lm-modal-bg" id="modal-bg"><div class="lm-modal lm-modalpos" style="max-width:640px;">
       <button class="close lm-iconbtn" id="modal-close">✕</button>
@@ -1287,7 +1749,7 @@
       </tbody></table>
       <div style="display:flex;gap:10px;margin-top:14px;">
         <div class="lm-field" style="flex:1;"><label>Order Status</label>
-          <select id="mo-status">${['New','Processing','Shipped','Delivered','Cancelled'].map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${s}</option>`).join('')}</select>
+          <select id="mo-status">${['New','Confirmed','Processing','Shipped','Out for Delivery','Delivered','Cancelled'].map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${s}</option>`).join('')}</select>
         </div>
         <div class="lm-field" style="flex:1;"><label>Payment Status</label>
           <select id="mo-paystatus">${['Pending','Paid','Failed','Refunded'].map(s=>`<option value="${s}" ${o.paymentStatus===s?'selected':''}>${s}</option>`).join('')}</select>
@@ -1317,11 +1779,27 @@
       const page = el.getAttribute('data-nav');
       const params = {};
       if(el.dataset.cat) params.cat = el.dataset.cat, params.filters = null;
+      if(el.dataset.collection) params.collection = el.dataset.collection, params.filters = null;
       if(el.dataset.id) params.id = el.dataset.id;
       if(el.dataset.tab) params.tab = el.dataset.tab;
-      if(page==='shop'){ APP.route.q=''; if(el.dataset.cat){ nav('shop',{cat:el.dataset.cat}); return;} }
+      if(page==='shop'){
+        APP.route.q='';
+        if(el.dataset.collection){ nav('shop',{collection:el.dataset.collection}); return; }
+        if(el.dataset.cat){ nav('shop',{cat:el.dataset.cat}); return; }
+      }
       nav(page, params);
     }));
+
+    root.querySelectorAll('[data-static]').forEach(el=>el.addEventListener('click', e=>{ e.preventDefault(); nav('static', {topic:el.dataset.static}); }));
+    root.querySelectorAll('[data-whatsapp], #whatsapp-float').forEach(el=>el.addEventListener('click', e=>{ e.preventDefault(); toast('WhatsApp chat would open here — configure your number in Store Settings','success'); }));
+    root.querySelectorAll('[data-social]').forEach(el=>el.addEventListener('click', e=>{ e.preventDefault(); toast(`This would open ChunariCouture's ${el.dataset.social} page`,'success'); }));
+    const newsletterBtn = document.getElementById('newsletter-submit');
+    if(newsletterBtn) newsletterBtn.addEventListener('click', ()=>{
+      const em = document.getElementById('newsletter-email').value.trim();
+      if(!em || !em.includes('@')){ toast('Please enter a valid email address','error'); return; }
+      toast('Subscribed! Welcome to the ChunariCouture family.','success');
+      document.getElementById('newsletter-email').value='';
+    });
 
     root.querySelectorAll('[data-wish]').forEach(el=>el.addEventListener('click', e=>{ e.stopPropagation(); toggleWishlist(el.getAttribute('data-wish')); }));
     root.querySelectorAll('[data-addcart]').forEach(el=>el.addEventListener('click', e=>{ e.stopPropagation(); addToCart(el.getAttribute('data-addcart'),1,{}); }));
@@ -1369,6 +1847,34 @@
       persistReviews();
       toast('Review submitted — pending admin approval','success');
       render();
+    });
+    root.querySelectorAll('[data-share]').forEach(el=>el.addEventListener('click', ()=>{
+      const p = product(el.dataset.pid);
+      const shareText = `Check out "${p?p.name:'this piece'}" on ChunariCouture`;
+      if(el.dataset.share==='copy'){
+        const url = window.location.href;
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(url).then(()=>toast('Link copied to clipboard','success')).catch(()=>toast('Could not copy link — copy it from your address bar','error'));
+        } else { toast('Copy not supported in this browser — copy the link from your address bar','error'); }
+      } else if(el.dataset.share==='whatsapp'){
+        window.open(`https://wa.me/?text=${encodeURIComponent(shareText+' — '+window.location.href)}`, '_blank');
+      }
+    }));
+
+    // Contact page
+    root.querySelectorAll('[data-faq]').forEach(el=>el.addEventListener('click', ()=>{ el.classList.toggle('open'); }));
+    const ctSubmit = document.getElementById('ct-submit');
+    if(ctSubmit) ctSubmit.addEventListener('click', ()=>{
+      const name = document.getElementById('ct-name').value.trim();
+      const email = document.getElementById('ct-email').value.trim();
+      const phone = document.getElementById('ct-phone').value.trim();
+      const subject = document.getElementById('ct-subject').value.trim();
+      const message = document.getElementById('ct-message').value.trim();
+      if(!name || !email || !message){ toast('Please fill in your name, email and message','error'); return; }
+      APP.messages.push({id:uid('msg_'), name, email, phone, subject, message, date:Date.now(), read:false});
+      persistMessages();
+      toast("Message sent — we'll get back to you soon",'success');
+      ['ct-name','ct-email','ct-phone','ct-subject','ct-message'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
     });
 
     // Cart
@@ -1425,8 +1931,8 @@
     root.querySelectorAll('[data-cancelorder]').forEach(el=>el.addEventListener('click', ()=>{
       confirmDialog('Cancel this order?', ()=>{
         const o = APP.orders.find(x=>x.id===el.dataset.cancelorder);
-        o.status='Cancelled'; if(o.paymentStatus==='Paid') o.paymentStatus='Refunded';
-        persistOrders(); toast('Order cancelled','success'); render();
+        cancelOrderAndRestoreStock(o);
+        toast('Order cancelled','success'); render();
       });
     }));
     const doLogout = document.getElementById('do-logout');
@@ -1494,6 +2000,7 @@
       const data = {
         name, description:val('m-desc'), price:+val('m-price')||0, discount:+val('m-discount')||0,
         category:val('m-cat'), sku:val('m-sku')||('SKU-'+uid()), stock:+val('m-stock')||0, status:val('m-status'),
+        fabric:val('m-fabric'),
         images:[val('m-image')||'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600'],
         variants:{colors:val('m-colors').split(',').map(s=>s.trim()).filter(Boolean), sizes:val('m-sizes').split(',').map(s=>s.trim()).filter(Boolean)},
       };
@@ -1529,8 +2036,10 @@
     const moSave = document.getElementById('mo-save');
     if(moSave) moSave.addEventListener('click', ()=>{
       const o = APP.orders.find(x=>x.id===moSave.dataset.id);
-      o.status = val('mo-status'); o.paymentStatus = val('mo-paystatus');
-      persistOrders(); toast('Order updated','success'); modal=null; render();
+      const newStatus = val('mo-status');
+      if(newStatus==='Cancelled' && o.status!=='Cancelled'){ cancelOrderAndRestoreStock(o); o.paymentStatus = val('mo-paystatus'); }
+      else { o.status = newStatus; o.paymentStatus = val('mo-paystatus'); }
+      persistOrders(); persistProducts(); toast('Order updated','success'); modal=null; render();
     });
 
     // Admin coupons
@@ -1559,6 +2068,46 @@
     }));
     root.querySelectorAll('[data-delrv]').forEach(el=>el.addEventListener('click', ()=>{
       confirmDialog('Delete this review?', ()=>{ APP.reviews = APP.reviews.filter(x=>x.id!==el.dataset.delrv); persistReviews(); toast('Review deleted','success'); render(); });
+    }));
+
+    // Admin banners
+    const newBanner = document.getElementById('new-banner');
+    if(newBanner) newBanner.addEventListener('click', ()=>{ modal={type:'banner', data:null}; render(); });
+    root.querySelectorAll('[data-editbanner]').forEach(el=>el.addEventListener('click', ()=>{ modal={type:'banner', data:APP.banners.find(b=>b.id===el.dataset.editbanner)}; render(); }));
+    root.querySelectorAll('[data-togglebanner]').forEach(el=>el.addEventListener('click', ()=>{ const b=APP.banners.find(x=>x.id===el.dataset.togglebanner); b.enabled=!b.enabled; persistBanners(); render(); }));
+    root.querySelectorAll('[data-delbanner]').forEach(el=>el.addEventListener('click', ()=>{
+      confirmDialog('Delete this banner?', ()=>{ APP.banners = APP.banners.filter(b=>b.id!==el.dataset.delbanner); persistBanners(); toast('Banner deleted','success'); render(); });
+    }));
+    const mbImage = document.getElementById('mb-image');
+    if(mbImage) mbImage.addEventListener('input', ()=>{ const prev=document.getElementById('mb-preview'); if(prev) prev.style.backgroundImage = `url('${mbImage.value}')`; });
+    const mbSave = document.getElementById('mb-save');
+    if(mbSave) mbSave.addEventListener('click', ()=>{
+      const title = val('mb-title'); if(!title){ toast('Banner title is required','error'); return; }
+      const data = {
+        title, subtitle:val('mb-subtitle'), description:val('mb-desc'), buttonText:val('mb-btntext')||'Shop Now',
+        buttonLink:val('mb-btnlink'), image:val('mb-image'), position:val('mb-position'), order:+val('mb-order')||1,
+        startDate:val('mb-start'), endDate:val('mb-end'),
+      };
+      const id = mbSave.dataset.id;
+      if(id){ Object.assign(APP.banners.find(b=>b.id===id), data); toast('Banner updated','success'); }
+      else { APP.banners.push({id:uid('ban_'), enabled:true, ...data}); toast('Banner created','success'); }
+      persistBanners(); modal=null; render();
+    });
+
+    // Admin inventory
+    root.querySelectorAll('[data-updatestock]').forEach(el=>el.addEventListener('click', ()=>{
+      const input = root.querySelector(`[data-stockinput="${el.dataset.updatestock}"]`);
+      const p = product(el.dataset.updatestock);
+      p.stock = Math.max(0, +input.value||0);
+      persistProducts(); toast('Stock updated','success'); render();
+    }));
+
+    // Admin contact messages
+    root.querySelectorAll('[data-readmsg]').forEach(el=>el.addEventListener('click', ()=>{
+      const m = APP.messages.find(x=>x.id===el.dataset.readmsg); m.read=true; persistMessages(); render();
+    }));
+    root.querySelectorAll('[data-delmsg]').forEach(el=>el.addEventListener('click', ()=>{
+      confirmDialog('Delete this message?', ()=>{ APP.messages = APP.messages.filter(x=>x.id!==el.dataset.delmsg); persistMessages(); toast('Message deleted','success'); render(); });
     }));
   }
   function val(id){ const el = document.getElementById(id); return el? el.value : ''; }
